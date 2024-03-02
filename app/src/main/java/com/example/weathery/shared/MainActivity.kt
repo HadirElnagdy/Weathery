@@ -1,10 +1,10 @@
-package com.example.weathery
+package com.example.weathery.shared
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.withCreated
+import com.example.weathery.R
 import com.example.weathery.network.WeatherRemoteDataSourceImpl
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
