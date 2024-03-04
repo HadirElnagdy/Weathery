@@ -2,4 +2,17 @@
     <string name="app_name">Weathery</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="location">Location</string>
+    <string name="notifications">Notifications</string>
+    <string name="units">Units</string>
+    <string name="language">Language</string>
+    <string name="gps">GPS</string>
+    <string name="map">Map</string>
+    <string name="english">English</string>
+    <string name="arabic">Arabic</string>
+    <string name="metric">Metric</string>
+    <string name="imperial">Imperial</string>
+    <string name="standard">Standard</string>
+    <string name="enable">Enable</string>
+    <string name="disable">Disable</string>
 </resources>

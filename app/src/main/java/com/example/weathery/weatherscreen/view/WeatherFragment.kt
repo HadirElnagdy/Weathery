@@ -2,16 +2,13 @@ package com.example.weathery.weatherscreen.view
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import com.example.weathery.R
 import com.example.weathery.databinding.FragmentWeatherBinding
-import com.example.weathery.models.WeatherRepository
 import com.example.weathery.models.WeatherRepositoryImpl
 import com.example.weathery.utils.ApiState
 import com.example.weathery.utils.NetworkUtils
