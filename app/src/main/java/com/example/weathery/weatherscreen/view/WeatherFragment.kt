@@ -49,17 +49,14 @@ class WeatherFragment : Fragment() {
                 viewModel.stateFlow.collectLatest {
                     when (it) {
                         is ApiState.Loading -> {
-                            binding.progressBar.visibility = View.VISIBLE
                         }
 
                         is ApiState.Success -> {
-                            binding.progressBar.visibility = View.INVISIBLE
 //                        updateUI()
                             Log.i(TAG, "onSuccess: ${it.data}")
                         }
 
                         is ApiState.Failure -> {
-                            binding.progressBar.visibility = View.INVISIBLE
                             Log.i(TAG, "onFailure: ${it.msg}")
                         }
                     }

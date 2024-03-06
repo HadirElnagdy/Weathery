@@ -2,7 +2,8 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="my_light_primary">#BDD7FD</color>
-    <color name="my_transparent_primary">#889BB6</color>
-    <color name="my_dark_primary">#222350</color>
+    <color name="my_primary_color">#2B304D</color>
+    <color name="my_secondary_color">#636B96</color>
+    <color name="dark_navy">#404365</color>
+    <color name="orange">#DDAA8E</color>
 </resources>

@@ -1,12 +1,18 @@
+import java.util.Properties
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id ("kotlin-kapt")
+    id("androidx.navigation.safeargs")
 }
 
 android {
     namespace = "com.example.weathery"
     compileSdk = 34
+
+    val properties = Properties()
+    properties.load(rootProject.file("local.properties").inputStream())
 
     defaultConfig {
         applicationId = "com.example.weathery"
@@ -16,6 +22,11 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "WEATHER_API_KEY", "\"${properties.getProperty("WEATHER_API_KEY")}\"")
+        buildConfigField("String", "MAP_API_KEY", "\"${properties.getProperty("MAP_API_KEY")}\"")
+
+
     }
 
     buildTypes {
@@ -36,6 +47,8 @@ android {
     }
     buildFeatures{
         viewBinding = true
+        dataBinding = true
+        buildConfig = true
     }
 }
 
@@ -81,4 +94,8 @@ dependencies {
     //Location
     implementation("com.google.android.gms:play-services-location:21.1.0")
     implementation ("com.google.android.gms:play-services-maps:18.2.0")
+
+    //Navigation
+    implementation ("androidx.navigation:navigation-fragment:2.7.7")
+    implementation ("androidx.navigation:navigation-ui:2.7.7")
 }
