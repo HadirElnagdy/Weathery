@@ -1,4 +1,4 @@
-package com.example.weathery.favorites.view
+package com.example.weathery.main.favorites.view
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

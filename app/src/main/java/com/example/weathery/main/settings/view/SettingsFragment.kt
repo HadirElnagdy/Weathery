@@ -1,4 +1,4 @@
-package com.example.weathery.alerts.view
+package com.example.weathery.main.settings.view
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,8 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.weathery.R
 
-
-class AlertsFragment : Fragment() {
+class SettingsFragment : Fragment() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,7 +20,8 @@ class AlertsFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_alerts, container, false)
+        return inflater.inflate(R.layout.fragment_settings, container, false)
     }
+
 
 }

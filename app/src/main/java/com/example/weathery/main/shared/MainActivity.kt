@@ -1,4 +1,4 @@
-package com.example.weathery.shared
+package com.example.weathery.main.shared
 
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle

@@ -15,7 +15,6 @@ object NetworkUtils {
             val network = connectivityManager.activeNetwork ?: return false
             val capabilities =
                 connectivityManager.getNetworkCapabilities(network) ?: return false
-
             return capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
         } else {
             val networkInfo = connectivityManager.activeNetworkInfo ?: return false
