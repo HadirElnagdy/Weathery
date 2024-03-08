@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.Weathery" parent="Theme.Material3.DayNight">
          <item name="colorPrimary">@color/my_primary_color</item>
-        <item name="colorAccent">@color/dark_navy</item>
+        <item name="colorAccent">@color/purple</item>
     </style>
     <style name="Theme.Weathery" parent="Base.Theme.Weathery" />
 </resources>

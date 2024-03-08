@@ -4,16 +4,13 @@ import android.Manifest.permission.ACCESS_COARSE_LOCATION
 import android.Manifest.permission.ACCESS_FINE_LOCATION
 import android.annotation.SuppressLint
 import android.app.Application
-import android.content.Context
 import android.content.pm.PackageManager
 import android.location.Geocoder
-import android.location.LocationManager
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.example.weathery.models.Repository
+import com.example.weathery.models.WeatherRepository
 import com.example.weathery.utils.ApiState
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
@@ -29,7 +26,7 @@ import java.lang.IllegalArgumentException
 import java.util.concurrent.TimeUnit
 import com.google.android.gms.location.*
 
-class SharedViewModel(private val app: Application, private val repository: Repository) : ViewModel() {
+class SharedViewModel(private val app: Application, private val repository: WeatherRepository) : ViewModel() {
 
 
     private lateinit var location: Pair<Double, Double> //lon, lat
@@ -131,7 +128,7 @@ class SharedViewModel(private val app: Application, private val repository: Repo
 }
 
 
-class SharedViewModelFactory(private val app: Application, private val repo: Repository): ViewModelProvider.Factory {
+class SharedViewModelFactory(private val app: Application, private val repo: WeatherRepository): ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return if (modelClass.isAssignableFrom(SharedViewModel::class.java)){
             SharedViewModel(app, repo) as T

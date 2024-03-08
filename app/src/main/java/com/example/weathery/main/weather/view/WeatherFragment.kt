@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.weathery.databinding.FragmentWeatherBinding
-import com.example.weathery.models.RepositoryImpl
+import com.example.weathery.models.WeatherRepositoryImpl
 import com.example.weathery.utils.ApiState
 import com.example.weathery.utils.NetworkUtils
 import com.example.weathery.main.weather.viewmodel.WeatherViewModel
@@ -42,8 +42,9 @@ class WeatherFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+/*
 
-        viewModelFactory = WeatherViewModelFactory(RepositoryImpl)
+        viewModelFactory = WeatherViewModelFactory(WeatherRepositoryImpl)
         if(NetworkUtils.isNetworkAvailable(requireContext())) {
             viewModel.getForcast(123.456, 78.90)
             setUpUI()
@@ -51,6 +52,7 @@ class WeatherFragment : Fragment() {
             Log.i(TAG, "onViewCreated: No Network here!!!")
         }
 
+*/
 
     }
 

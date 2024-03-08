@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
             it.setDisplayShowHomeEnabled(true)
             it.setDisplayHomeAsUpEnabled(true)
             it.setDisplayShowTitleEnabled(false)
-            it.setBackgroundDrawable(ColorDrawable(ContextCompat.getColor(this, R.color.my_primary_color)))
+            it.setBackgroundDrawable(ColorDrawable(ContextCompat.getColor(this, R.color.transparent)))
         }
 
         val navController = Navigation.findNavController(this, R.id.nav_host_fragment)

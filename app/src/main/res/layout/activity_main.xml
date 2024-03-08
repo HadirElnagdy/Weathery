@@ -31,7 +31,8 @@
         app:itemIconTint="@color/my_primary_color"
         app:itemTextColor="@color/my_primary_color"
         android:background="@color/white"
-        app:headerLayout="@layout/nav_header"/>
+        app:headerLayout="@layout/nav_header"
+        app:itemTextAppearanceActiveBoldEnabled="true"/>
 
 
 </androidx.drawerlayout.widget.DrawerLayout>

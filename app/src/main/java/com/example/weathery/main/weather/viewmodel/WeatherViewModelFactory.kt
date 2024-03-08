@@ -2,10 +2,10 @@ package com.example.weathery.main.weather.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.weathery.models.Repository
+import com.example.weathery.models.WeatherRepository
 import java.lang.IllegalArgumentException
 
-class WeatherViewModelFactory(private val repo: Repository): ViewModelProvider.Factory {
+class WeatherViewModelFactory(private val repo: WeatherRepository): ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return if (modelClass.isAssignableFrom(WeatherViewModel::class.java)){
             WeatherViewModel(repo) as T
