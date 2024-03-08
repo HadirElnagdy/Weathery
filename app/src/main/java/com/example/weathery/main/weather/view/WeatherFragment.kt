@@ -42,7 +42,6 @@ class WeatherFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-/*
 
         viewModelFactory = WeatherViewModelFactory(WeatherRepositoryImpl)
         if(NetworkUtils.isNetworkAvailable(requireContext())) {
@@ -52,7 +51,6 @@ class WeatherFragment : Fragment() {
             Log.i(TAG, "onViewCreated: No Network here!!!")
         }
 
-*/
 
     }
 
@@ -61,14 +59,14 @@ class WeatherFragment : Fragment() {
             viewModel.forecast.collectLatest {
                 when (it) {
                     is ApiState.Loading -> {
-                        //progress bar
+                        binding.progressBar.visibility = View.VISIBLE
                     }
                     is ApiState.Success -> {
-                        Log.i(TAG, "onSuccess: ${it.data}")
                         updateUI(it.data)
                     }
 
                     is ApiState.Failure -> {
+                        binding.progressBar.visibility = View.INVISIBLE
                         Log.i(TAG, "onFailure: ${it.msg}")
                         //Custom alert with error message
                     }
@@ -79,7 +77,9 @@ class WeatherFragment : Fragment() {
     }
 
     private fun updateUI(data: WeatherResponse){
-        //progress bar invisible
-        //set the data
+        binding.progressBar.visibility = View.INVISIBLE
+//        binding.txtCityName.text =
+        binding.txtTemp.text = "${data.current?.temp}\u00B0"
+        binding.txtWeatherDesc.text = "It's ${data.current?.weather?.get(0)?.main}"
     }
 }

@@ -29,7 +29,7 @@ class AlarmsFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View? {
 
-        return inflater.inflate(R.layout.fragment_map, container, false)
+        return inflater.inflate(R.layout.fragment_alarms, container, false)
     }
 
 

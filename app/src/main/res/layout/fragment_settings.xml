@@ -167,6 +167,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/arabic" />
         </RadioGroup>
+
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView

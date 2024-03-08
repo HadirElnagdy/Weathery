@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <array name="preloaded_fonts" translatable="false">
+        <item>@font/alata</item>
+        <item>@font/amaranth</item>
+        <item>@font/brygada_1918</item>
+        <item>@font/cousine</item>
+        <item>@font/epilogue</item>
         <item>@font/montserrat</item>
     </array>
 </resources>
