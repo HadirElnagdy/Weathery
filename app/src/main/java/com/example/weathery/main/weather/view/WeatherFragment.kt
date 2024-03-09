@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.bumptech.glide.Glide
 import com.example.weathery.databinding.FragmentWeatherBinding
 import com.example.weathery.models.WeatherRepositoryImpl
 import com.example.weathery.utils.ApiState
@@ -60,6 +61,7 @@ class WeatherFragment : Fragment() {
                 when (it) {
                     is ApiState.Loading -> {
                         binding.progressBar.visibility = View.VISIBLE
+                        binding.scrollView3.visibility = View.INVISIBLE
                     }
                     is ApiState.Success -> {
                         updateUI(it.data)
@@ -78,8 +80,13 @@ class WeatherFragment : Fragment() {
 
     private fun updateUI(data: WeatherResponse){
         binding.progressBar.visibility = View.INVISIBLE
+        binding.scrollView3.visibility = View.VISIBLE
 //        binding.txtCityName.text =
         binding.txtTemp.text = "${data.current?.temp}\u00B0"
         binding.txtWeatherDesc.text = "It's ${data.current?.weather?.get(0)?.main}"
+        Glide.with(requireContext())
+            .load("https://openweathermap.org/img/wn/${data.current?.weather?.get(0)?.icon}@2x.png")
+            .centerCrop()
+            .into(binding.imgIcon)
     }
 }
