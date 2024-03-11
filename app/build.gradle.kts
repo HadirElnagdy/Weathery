@@ -119,42 +119,45 @@ dependencies {
     //lottie
     implementation("com.airbnb.android:lottie:6.1.0")
 
+    //splash
+    implementation("androidx.core:core-splashscreen:1.0.0")
+
     //testing dependencies
 
 
     // AndroidX and Robolectric
-        testImplementation("androidx.test.ext:junit-ktx:$androidXTestExtKotlinRunnerVersion")
-        testImplementation("androidx.test:core-ktx:$androidXTestCoreVersion")
-        testImplementation("org.robolectric:robolectric:4.8")
+    testImplementation("androidx.test.ext:junit-ktx:$androidXTestExtKotlinRunnerVersion")
+    testImplementation("androidx.test:core-ktx:$androidXTestCoreVersion")
+    testImplementation("org.robolectric:robolectric:4.8")
 
     // InstantTaskExecutorRule
-        testImplementation("androidx.arch.core:core-testing:2.1.0")
-        androidTestImplementation("androidx.arch.core:core-testing:2.1.0")
+    testImplementation("androidx.arch.core:core-testing:2.1.0")
+    androidTestImplementation("androidx.arch.core:core-testing:2.1.0")
 
     // kotlinx-coroutines
-        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion")
-        testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion")
-        androidTestImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion")
+    androidTestImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion")
 
     // hamcrest
-        testImplementation("org.hamcrest:hamcrest:2.2")
-        testImplementation("org.hamcrest:hamcrest-library:2.2")
-        androidTestImplementation("org.hamcrest:hamcrest:2.2")
-        androidTestImplementation("org.hamcrest:hamcrest-library:2.2")
+    testImplementation("org.hamcrest:hamcrest:2.2")
+    testImplementation("org.hamcrest:hamcrest-library:2.2")
+    androidTestImplementation("org.hamcrest:hamcrest:2.2")
+    androidTestImplementation("org.hamcrest:hamcrest-library:2.2")
 
     // Dependencies for local unit tests
-        testImplementation("junit:junit:$junitVersion")
-        testImplementation("org.hamcrest:hamcrest-all:$hamcrestVersion")
-        testImplementation("androidx.arch.core:core-testing:$archTestingVersion")
-        testImplementation("org.robolectric:robolectric:$robolectricVersion")
+    testImplementation("junit:junit:$junitVersion")
+    testImplementation("org.hamcrest:hamcrest-all:$hamcrestVersion")
+    testImplementation("androidx.arch.core:core-testing:$archTestingVersion")
+    testImplementation("org.robolectric:robolectric:$robolectricVersion")
 
     // AndroidX Test - JVM testing
-        testImplementation("androidx.test:core-ktx:$androidXTestCoreVersion")
-        testImplementation("androidx.test.ext:junit:$androidXTestExtKotlinRunnerVersion")
+    testImplementation("androidx.test:core-ktx:$androidXTestCoreVersion")
+    testImplementation("androidx.test.ext:junit:$androidXTestExtKotlinRunnerVersion")
 
     // AndroidX Test - Instrumented testing
-        androidTestImplementation("androidx.test.ext:junit:$androidXTestExtKotlinRunnerVersion")
-        androidTestImplementation("androidx.test.espresso:espresso-core:$espressoVersion")
-        androidTestImplementation("androidx.arch.core:core-testing:$archTestingVersion")
+    androidTestImplementation("androidx.test.ext:junit:$androidXTestExtKotlinRunnerVersion")
+    androidTestImplementation("androidx.test.espresso:espresso-core:$espressoVersion")
+    androidTestImplementation("androidx.arch.core:core-testing:$archTestingVersion")
 
 }

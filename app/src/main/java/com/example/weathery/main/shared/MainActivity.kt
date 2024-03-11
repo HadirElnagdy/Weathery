@@ -1,26 +1,41 @@
 package com.example.weathery.main.shared
 
 import android.graphics.drawable.ColorDrawable
+import android.location.Location
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelStoreOwner
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
 import com.example.weathery.R
 import com.example.weathery.databinding.ActivityMainBinding
+import com.example.weathery.models.WeatherRepositoryImpl
 
 
 class MainActivity : AppCompatActivity() {
+
     private val TAG = "MainActivity"
     private lateinit var binding: ActivityMainBinding
+    lateinit var viewModelFactory: SharedViewModelFactory
+    lateinit var viewModel: SharedViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        viewModelFactory = SharedViewModelFactory(this, WeatherRepositoryImpl)
+        viewModel = ViewModelProvider(this as ViewModelStoreOwner, viewModelFactory).get(SharedViewModel::class.java)
 
+        val location = intent.getParcelableExtra("location") as? Location
+        Log.i(TAG, "onCreate: ${location.toString()}")
+        viewModel.getForecast(location)
         val actionBar = supportActionBar
         actionBar?.let {
             it.setHomeAsUpIndicator(R.drawable.ic_menu)

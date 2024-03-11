@@ -18,7 +18,11 @@
         android:id="@+id/favoritesFragment"
         android:name="com.example.weathery.main.favorites.view.FavoritesFragment"
         android:label="@string/fav"
-        tools:layout="@layout/fragment_favorites" />
+        tools:layout="@layout/fragment_favorites" >
+        <action
+            android:id="@+id/action_favoritesFragment_to_mapFragment"
+            app:destination="@id/mapFragment" />
+    </fragment>
     <fragment
         android:id="@+id/alertsFragment"
         android:name="com.example.weathery.main.alarm.view.AlarmsFragment"
@@ -28,10 +32,19 @@
         android:id="@+id/settingsFragment"
         android:name="com.example.weathery.main.settings.view.SettingsFragment"
         android:label="@string/settings"
-        tools:layout="@layout/fragment_settings" />
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_settingsFragment_to_mapFragment"
+            app:destination="@id/mapFragment" />
+    </fragment>
     <fragment
         android:id="@+id/dailyWeatherFragment"
         android:name="com.example.weathery.main.dailyweather.DailyWeatherFragment"
         android:label="fragment_daily_weather"
         tools:layout="@layout/fragment_daily_weather" />
+    <fragment
+        android:id="@+id/mapFragment"
+        android:name="com.example.weathery.main.map.MapFragment"
+        android:label="fragment_map"
+        tools:layout="@layout/fragment_map" />
 </navigation>

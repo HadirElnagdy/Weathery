@@ -25,6 +25,7 @@
     <string name="humidity">Humidity</string>
     <string name="wind_speed">Wind Speed</string>
     <string name="pressure">Pressure</string>
+    <string name="last_update">Last update</string>
 
 
 </resources>

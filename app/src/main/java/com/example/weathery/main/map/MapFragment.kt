@@ -59,6 +59,7 @@ class MapFragment : Fragment() , OnMapReadyCallback {
             // Code to save the location
             // You can access the latitude and longitude from latLng variable
             // For example, you can store them in ViewModel or Repository
+            //popBack
             Log.i(TAG, "showSaveLocationSnackbar: lat: ${latLng.latitude}")
         }.show()
     }
