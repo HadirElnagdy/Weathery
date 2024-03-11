@@ -53,6 +53,7 @@
                         android:id="@+id/txt_weather_desc"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
                         android:layout_marginTop="8dp"
                         android:textColor="@color/white"
                         android:textSize="16sp"
@@ -92,7 +93,8 @@
                         android:textSize="55sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.6" />
 
                     <ImageView
                         android:id="@+id/imageView2"
@@ -174,9 +176,9 @@
                     <ImageView
                         android:id="@+id/imageView3"
                         android:layout_width="35dp"
-                        android:layout_height="52dp"
+                        android:layout_height="39dp"
                         android:layout_marginStart="16dp"
-                        android:layout_marginTop="16dp"
+                        android:layout_marginTop="20dp"
                         android:src="@drawable/ic_humidity"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -223,10 +225,10 @@
                     <ImageView
                         android:id="@+id/img_cell_icon"
                         android:layout_width="35dp"
-                        android:layout_height="52dp"
+                        android:layout_height="39dp"
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="16dp"
-                        android:src="@drawable/ic_humidity"
+                        android:src="@drawable/ic_pressure"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -274,16 +276,16 @@
 
                     <ImageView
                         android:id="@+id/imageView5"
-                        android:layout_width="35dp"
-                        android:layout_height="52dp"
+                        android:layout_width="34dp"
+                        android:layout_height="39dp"
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="16dp"
-                        android:src="@drawable/ic_humidity"
+                        android:src="@drawable/ic_visability"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/txt_clouds"
+                        android:id="@+id/txt_visibility"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="70%"
@@ -297,7 +299,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="16dp"
-                        android:text="Clouds"
+                        android:text="@string/visibility"
                         android:textColor="@color/white"
                         android:textSize="15sp"
                         android:textStyle="bold"
@@ -324,10 +326,10 @@
                     <ImageView
                         android:id="@+id/imageView6"
                         android:layout_width="35dp"
-                        android:layout_height="52dp"
+                        android:layout_height="39dp"
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="16dp"
-                        android:src="@drawable/ic_humidity"
+                        android:src="@drawable/ic_wind"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -337,11 +339,11 @@
                         android:layout_height="wrap_content"
                         android:text="70%"
                         android:textColor="@color/white"
-                        app:layout_constraintStart_toStartOf="@+id/txt_cell_temp"
-                        app:layout_constraintTop_toBottomOf="@+id/txt_cell_temp" />
+                        app:layout_constraintStart_toStartOf="@+id/txt_"
+                        app:layout_constraintTop_toBottomOf="@+id/txt_" />
 
                     <TextView
-                        android:id="@+id/txt_cell_temp"
+                        android:id="@+id/txt_"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"

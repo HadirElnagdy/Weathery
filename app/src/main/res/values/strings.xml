@@ -26,6 +26,10 @@
     <string name="wind_speed">Wind Speed</string>
     <string name="pressure">Pressure</string>
     <string name="last_update">Last update</string>
+    <string name="visibility">Visibility</string>
+    <string name="low">L: </string>
+    <string name="high">H: </string>
+    <string name="today">Today</string>
 
 
 </resources>

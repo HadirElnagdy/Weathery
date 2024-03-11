@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.weathery.databinding.HourlyCellBinding
 import com.example.weathery.models.HourlyItem
+import com.example.weathery.utils.SimpleUtils
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -37,10 +38,9 @@ class HourlyRecyclerViewAdapter(var context: Context):
 
         }
         holder.binding.txtCellTemp.text = currentHour.temp.toString()
-        Glide.with(context)
-            .load("https://openweathermap.org/img/wn/${currentHour.weather?.get(0)?.icon}@2x.png")
-            .centerCrop()
-            .into(holder.binding.imgCellIcon)
+        holder.binding.imgCellIcon.setImageResource(
+            SimpleUtils
+            .getIconResourceId(currentHour?.weather?.get(0)?.icon?:""))
 
     }
 
