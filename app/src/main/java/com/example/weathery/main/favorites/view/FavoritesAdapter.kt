@@ -32,7 +32,7 @@ class FavoritesAdapter(
     override fun onBindViewHolder(holder: FavViewHolder, position: Int) {
         val currentItem = getItem(position)
 //        holder.binding.imgFav =
-        holder.binding.txtFavCity.text = currentItem.city
+        holder.binding.txtFavCity.text = currentItem.locality
         holder.binding.txtFavTemp.text = currentItem.forecast.current?.temp.toString()
         holder.binding.txtFavWeather.text = currentItem.forecast.current?.weather?.get(0)?.main
     }
@@ -72,15 +72,7 @@ abstract class SwipeGesture(var context: Context): ItemTouchHelper.SimpleCallbac
         actionState: Int,
         isCurrentlyActive: Boolean,
     ) {
-        RecyclerViewSwipeDecorator.Builder(
-            c,
-            recyclerView,
-            viewHolder,
-            dX,
-            dY,
-            actionState,
-            isCurrentlyActive
-        )
+        RecyclerViewSwipeDecorator.Builder(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
             .addBackgroundColor(ContextCompat.getColor(context, R.color.red))
             .addActionIcon(R.drawable.ic_del)
             .create()

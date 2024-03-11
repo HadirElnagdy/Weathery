@@ -101,6 +101,19 @@ class WeatherFragment : Fragment() {
         binding.txtPressure.text = data.current?.pressure?.toString()
         binding.txtVisibility.text = data.current?.visibility?.toString()
         binding.txtWindSpeed.text = data.current?.windSpeed?.toString()
+        data.current?.weather?.get(0)?.id?.let {
+            if(it >= 300 && it <= 531){
+                binding.lottieHome.setAnimation(R.raw.rain_animation)
+                binding.lottieHome.visibility = View.VISIBLE
+            }
+            else if(it >= 600 && it <= 622){
+                binding.lottieHome.setAnimation(R.raw.snow_animation)
+                binding.lottieHome.visibility = View.VISIBLE
+            }
+            else{
+                binding.lottieHome.visibility = View.INVISIBLE
+            }
+        }
         setupRecyclerViews()
 
     }

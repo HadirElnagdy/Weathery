@@ -13,7 +13,7 @@ data class WeatherResponse (
     val hourly: List<HourlyItem?>? = null,
     val minutely: List<MinutelyItem?>? = null,
     val lat: Any? = null
-)
+):Serializable
 
 data class Current(
     val sunrise: Int? = null,
