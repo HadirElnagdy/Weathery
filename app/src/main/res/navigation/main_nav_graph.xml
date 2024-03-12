@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_favoritesFragment_to_mapFragment"
             app:destination="@id/mapFragment" />
+        <action
+            android:id="@+id/action_favoritesFragment_to_weatherFragment"
+            app:destination="@id/weatherFragment" />
     </fragment>
     <fragment
         android:id="@+id/alertsFragment"
@@ -46,5 +49,10 @@
         android:id="@+id/mapFragment"
         android:name="com.example.weathery.main.map.MapFragment"
         android:label="fragment_map"
-        tools:layout="@layout/fragment_map" />
+        tools:layout="@layout/fragment_map" >
+        <argument
+            android:name="fromFav"
+            app:argType="boolean"
+            android:defaultValue="true" />
+    </fragment>
 </navigation>

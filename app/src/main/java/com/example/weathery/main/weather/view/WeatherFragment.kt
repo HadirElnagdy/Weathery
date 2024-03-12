@@ -13,6 +13,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weathery.R
+import com.example.weathery.database.FavLocationLocalDataSourceImpl
 import com.example.weathery.databinding.FragmentWeatherBinding
 import com.example.weathery.main.shared.SharedViewModel
 import com.example.weathery.main.shared.SharedViewModelFactory
@@ -52,47 +53,44 @@ class WeatherFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        viewModelFactory = SharedViewModelFactory(requireContext(), WeatherRepositoryImpl)
-        viewModel = ViewModelProvider(activity as ViewModelStoreOwner, viewModelFactory).get(SharedViewModel::class.java)
+        setupViewModel()
         if(NetworkUtils.isNetworkAvailable(requireContext())) {
-            setUpUI()
+            observeWeatherForecast()
         }else {
             Log.i(TAG, "onViewCreated: No Network here!!!")
         }
 
-
     }
 
-    private fun setUpUI(){
+    private fun observeWeatherForecast(){
         lifecycleScope.launch {
-            viewModel.forecast.collectLatest {
-                when (it) {
-                    is ApiState.Loading -> {
-                        binding.progressBar.visibility = View.VISIBLE
-                        binding.scrollView3.visibility = View.INVISIBLE
-                    }
-                    is ApiState.Success -> {
-                        updateUI(it.data)
-                    }
-                    is ApiState.Failure -> {
-                        binding.progressBar.visibility = View.INVISIBLE
-                        Log.i(TAG, "onFailure: ${it.msg}")
-                        //Custom alert with error message
-                    }
+            viewModel.forecast.collectLatest { state ->
+                when (state) {
+                    is ApiState.Loading -> showLoadingState()
+                    is ApiState.Success -> updateUI(state.data)
+                    is ApiState.Failure -> showErrorState(state.msg.toString())
                 }
             }
-
         }
     }
+    private fun showErrorState(msg: String){
+        binding.progressBar.visibility = View.INVISIBLE
+        binding.scrollView3.visibility = View.INVISIBLE
+        Log.i(TAG, "setUpUI: ${msg}")
+        //update the ui with the existing room weather
+    }
 
+    private fun showLoadingState(){
+        binding.progressBar.visibility = View.VISIBLE
+        binding.scrollView3.visibility = View.INVISIBLE
+    }
     @SuppressLint("SetTextI18n")
     private fun updateUI(data: WeatherResponse){
         response = data
         val current = data.current?.weather?.get(0)
         binding.progressBar.visibility = View.INVISIBLE
         binding.scrollView3.visibility = View.VISIBLE
-        binding.txtCityName.text = viewModel.getCityName()
+        binding.txtCityName.text = viewModel.getCityName(viewModel.location)
         binding.txtTemp.text = "${data.current?.temp}\u00B0"
         binding.txtWeatherDesc.text = "${current?.main}"
         binding.imgIcon.setImageResource(SimpleUtils.getIconResourceId(current?.icon?:""))
@@ -101,6 +99,7 @@ class WeatherFragment : Fragment() {
         binding.txtPressure.text = data.current?.pressure?.toString()
         binding.txtVisibility.text = data.current?.visibility?.toString()
         binding.txtWindSpeed.text = data.current?.windSpeed?.toString()
+        Log.i(TAG, "updateUI: ${data.current?.windSpeed?.toString()}")
         data.current?.weather?.get(0)?.id?.let {
             if(it >= 300 && it <= 531){
                 binding.lottieHome.setAnimation(R.raw.rain_animation)
@@ -115,9 +114,13 @@ class WeatherFragment : Fragment() {
             }
         }
         setupRecyclerViews()
-
     }
 
+    private fun setupViewModel(){
+        viewModelFactory = SharedViewModelFactory(requireActivity().application,
+            WeatherRepositoryImpl.getInstance(FavLocationLocalDataSourceImpl.getInstance(requireContext())))
+        viewModel = ViewModelProvider(activity as ViewModelStoreOwner, viewModelFactory).get(SharedViewModel::class.java)
+    }
     private fun setupRecyclerViews(){
         hourlyAdapter = HourlyRecyclerViewAdapter(requireContext())
         hourlyAdapter.submitList(response.hourly)

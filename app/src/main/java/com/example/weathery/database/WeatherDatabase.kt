@@ -1,13 +1,15 @@
-/*
 package com.example.weathery.database
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import com.example.weathery.models.FavLocationsWeather
+import com.example.weathery.utils.WeatherResponseConverter
 
 @Database(entities = arrayOf(FavLocationsWeather::class), version = 1 )
+@TypeConverters(WeatherResponseConverter::class)
 abstract class WeatherDatabase: RoomDatabase() {
     abstract fun getFavDao(): FavLocationDao
     companion object{
@@ -24,6 +26,4 @@ abstract class WeatherDatabase: RoomDatabase() {
             }
         }
     }
-
 }
-*/

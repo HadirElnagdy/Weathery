@@ -13,11 +13,11 @@ data class WeatherResponse (
     val hourly: List<HourlyItem?>? = null,
     val minutely: List<MinutelyItem?>? = null,
     val lat: Any? = null
-):Serializable
+)
 
 data class Current(
     val sunrise: Int? = null,
-    val temp: Any? = null,
+    val temp: Any? = "--",
     val visibility: Int? = null,
     val uvi: Any? = null,
     val pressure: Int? = null,
@@ -30,7 +30,7 @@ data class Current(
     val sunset: Int? = null,
     val weather: List<WeatherItem?>? = null,
     val humidity: Int? = null,
-    val windSpeed: Any? = null
+    val windSpeed: Any? = "--"
 )
 
 data class HourlyItem(
@@ -68,7 +68,7 @@ data class FeelsLike(
 
 data class MinutelyItem(
     val dt: Int? = null,
-    val precipitation: Int? = null
+    val precipitation: Any? = null
 )
 
 data class WeatherItem(
@@ -98,6 +98,6 @@ data class DailyItem(
     val sunset: Int? = null,
     val weather: List<WeatherItem?>? = null,
     val humidity: Int? = null,
-    val windSpeed: Any? = null
+    val windSpeed: Any? = "--"
 )
 

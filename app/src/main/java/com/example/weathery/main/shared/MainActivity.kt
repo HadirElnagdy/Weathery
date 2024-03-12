@@ -15,6 +15,8 @@ import androidx.lifecycle.ViewModelStoreOwner
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
 import com.example.weathery.R
+import com.example.weathery.database.FavLocationLocalDataSource
+import com.example.weathery.database.FavLocationLocalDataSourceImpl
 import com.example.weathery.databinding.ActivityMainBinding
 import com.example.weathery.models.WeatherRepositoryImpl
 
@@ -30,7 +32,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        viewModelFactory = SharedViewModelFactory(this, WeatherRepositoryImpl)
+        viewModelFactory = SharedViewModelFactory(this.application
+            , WeatherRepositoryImpl.getInstance(FavLocationLocalDataSourceImpl.getInstance(this)))
         viewModel = ViewModelProvider(this as ViewModelStoreOwner, viewModelFactory).get(SharedViewModel::class.java)
 
         val location = intent.getParcelableExtra("location") as? Location

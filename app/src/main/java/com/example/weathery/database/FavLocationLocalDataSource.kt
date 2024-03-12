@@ -1,12 +1,11 @@
-/*
 package com.example.weathery.database
 
 import android.content.Context
 import com.example.weathery.models.FavLocationsWeather
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.Flow
 
 interface FavLocationLocalDataSource{
-    fun getAllFavorites(): StateFlow<List<FavLocationsWeather>>
+    fun getAllFavorites(): Flow<List<FavLocationsWeather>>
     suspend fun insertFavorite(favorite: FavLocationsWeather)
     suspend fun updateFavorite(favorite: FavLocationsWeather)
     suspend fun deleteFavorite(favorite: FavLocationsWeather)
@@ -28,7 +27,7 @@ class FavLocationLocalDataSourceImpl private constructor(context: Context): FavL
     }
 
 
-    override fun getAllFavorites(): StateFlow<List<FavLocationsWeather>> {
+    override fun getAllFavorites(): Flow<List<FavLocationsWeather>> {
         return favLocationDao.getAllFavorites()
     }
 
@@ -43,4 +42,4 @@ class FavLocationLocalDataSourceImpl private constructor(context: Context): FavL
     override suspend fun deleteFavorite(favorite: FavLocationsWeather) {
         favLocationDao.deleteFavorite(favorite)
     }
-}*/
+}

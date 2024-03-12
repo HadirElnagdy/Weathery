@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.weathery.R
 import com.example.weathery.databinding.FavCellBinding
 import com.example.weathery.models.FavLocationsWeather
+import com.example.weathery.utils.SimpleUtils
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator
 
 
@@ -31,12 +32,11 @@ class FavoritesAdapter(
 
     override fun onBindViewHolder(holder: FavViewHolder, position: Int) {
         val currentItem = getItem(position)
-//        holder.binding.imgFav =
         holder.binding.txtFavCity.text = currentItem.locality
-        holder.binding.txtFavTemp.text = currentItem.forecast.current?.temp.toString()
-        holder.binding.txtFavWeather.text = currentItem.forecast.current?.weather?.get(0)?.main
+        holder.binding.txtFavTemp.text = currentItem.forecast?.current?.temp.toString()
+        holder.binding.txtFavWeather.text = currentItem.forecast?.current?.weather?.get(0)?.main
+        holder.binding.imgFav.setImageResource(SimpleUtils.getIconResourceId(currentItem.forecast?.current?.weather?.get(0)?.icon?:""))
     }
-
     /*override fun onItemDismiss(position: Int) {
         val currentItem = currentList[position]
         onSwipeDelete(currentItem)
