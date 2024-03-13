@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.weathery.R
 import com.example.weathery.databinding.DailyCellBinding
-import com.example.weathery.models.DailyItem
+import com.example.weathery.data.models.DailyItem
 import com.example.weathery.utils.SimpleUtils
 import java.text.SimpleDateFormat
 import java.util.Calendar

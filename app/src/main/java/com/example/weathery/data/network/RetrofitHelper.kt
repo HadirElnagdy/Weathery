@@ -1,4 +1,4 @@
-package com.example.weathery.network
+package com.example.weathery.data.network
 
 import com.example.weathery.utils.Constants
 import retrofit2.Retrofit
@@ -13,7 +13,7 @@ object RetrofitHelper {
 
 
     val retrofitWeatherService: WeatherService by lazy {
-        RetrofitHelper.weatherRetrofitInstance.create(WeatherService::class.java)
+        weatherRetrofitInstance.create(WeatherService::class.java)
     }
 
 

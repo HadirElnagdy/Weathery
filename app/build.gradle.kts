@@ -59,6 +59,7 @@ android {
 dependencies {
 
 
+    implementation("androidx.test:runner:1.5.2")
     val androidXTestCoreVersion = ("1.4.0")
     val androidXTestExtKotlinRunnerVersion = ("1.1.3")
     val archTestingVersion = ("2.1.0")
@@ -121,6 +122,9 @@ dependencies {
 
     //splash
     implementation("androidx.core:core-splashscreen:1.0.0")
+
+    //datastore
+    implementation("androidx.datastore:datastore-preferences-core:1.0.0")
 
     //testing dependencies
 

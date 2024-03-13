@@ -3,17 +3,27 @@ package com.example.weathery.utils
 import com.example.weathery.R
 import java.text.SimpleDateFormat
 import java.util.Date
+import java.util.TimeZone
 
 
 class SimpleUtils {
     companion object{
-        val currentDateTime: String
-            get() {
-                val formatter = SimpleDateFormat("MMM dd hh:mm a"/*, Locale("en")*/)
-                val currentDate = Date()
-                return formatter.format(currentDate)
-            }
+        fun convertUnixTimeStamp(unixTimestamp: Long?, timezoneId: String?): Pair<String, String> {
+            val currentDateTime = "No timestamp provided" to "None"
+            unixTimestamp?.let {
+                val date = Date(unixTimestamp * 1000)
+                val dateFormatter = SimpleDateFormat("MMM dd")
+                val timeFormatter = SimpleDateFormat("hh:mm a")
 
+                dateFormatter.timeZone = TimeZone.getTimeZone(timezoneId)
+                timeFormatter.timeZone = TimeZone.getTimeZone(timezoneId)
+
+                val formattedDate = dateFormatter.format(date)
+                val formattedTime = timeFormatter.format(date)
+                return Pair(formattedDate, formattedTime)
+            }
+            return currentDateTime
+        }
         fun getIconResourceId(iconCode: String): Int {
             return when (iconCode) {
                 "01d" -> R.drawable.ic_sunny

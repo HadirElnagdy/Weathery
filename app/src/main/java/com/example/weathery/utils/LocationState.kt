@@ -1,7 +1,7 @@
 package com.example.weathery.utils
 
 import android.location.Location
-import com.example.weathery.models.WeatherResponse
+import com.example.weathery.data.models.WeatherResponse
 
 sealed class LocationState {
     class Success(val data: Location): LocationState()

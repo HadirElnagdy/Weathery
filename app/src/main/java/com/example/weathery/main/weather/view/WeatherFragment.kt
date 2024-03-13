@@ -13,14 +13,14 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weathery.R
-import com.example.weathery.database.FavLocationLocalDataSourceImpl
+import com.example.weathery.data.database.FavLocationLocalDataSourceImpl
 import com.example.weathery.databinding.FragmentWeatherBinding
 import com.example.weathery.main.shared.SharedViewModel
 import com.example.weathery.main.shared.SharedViewModelFactory
-import com.example.weathery.models.WeatherRepositoryImpl
+import com.example.weathery.data.repositories.WeatherRepositoryImpl
 import com.example.weathery.utils.ApiState
 import com.example.weathery.utils.NetworkUtils
-import com.example.weathery.models.WeatherResponse
+import com.example.weathery.data.models.WeatherResponse
 import com.example.weathery.utils.SimpleUtils
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -28,13 +28,13 @@ import kotlinx.coroutines.launch
 
 class WeatherFragment : Fragment() {
 
-    lateinit var binding: FragmentWeatherBinding
-    lateinit var viewModelFactory: SharedViewModelFactory
-    lateinit var viewModel: SharedViewModel
-    lateinit var hourlyAdapter: HourlyRecyclerViewAdapter
-    lateinit var dailyAdapter: DailyRecyclerViewAdapter
-    lateinit var response: WeatherResponse
-    private val TAG = "WeatherFragment"
+    private lateinit var binding: FragmentWeatherBinding
+    private lateinit var viewModelFactory: SharedViewModelFactory
+    private lateinit var viewModel: SharedViewModel
+    private lateinit var hourlyAdapter: HourlyRecyclerViewAdapter
+    private lateinit var dailyAdapter: DailyRecyclerViewAdapter
+    private lateinit var response: WeatherResponse
+    private val tag = "WeatherFragment"
 
 
 
@@ -57,7 +57,7 @@ class WeatherFragment : Fragment() {
         if(NetworkUtils.isNetworkAvailable(requireContext())) {
             observeWeatherForecast()
         }else {
-            Log.i(TAG, "onViewCreated: No Network here!!!")
+            Log.i(tag, "onViewCreated: No Network here!!!")
         }
 
     }
@@ -76,8 +76,8 @@ class WeatherFragment : Fragment() {
     private fun showErrorState(msg: String){
         binding.progressBar.visibility = View.INVISIBLE
         binding.scrollView3.visibility = View.INVISIBLE
-        Log.i(TAG, "setUpUI: ${msg}")
-        //update the ui with the existing room weather
+        Log.i(tag, "setUpUI: ${msg}")
+        //if msg == can't find api update the ui with the existing room weather
     }
 
     private fun showLoadingState(){
@@ -90,18 +90,23 @@ class WeatherFragment : Fragment() {
         val current = data.current?.weather?.get(0)
         binding.progressBar.visibility = View.INVISIBLE
         binding.scrollView3.visibility = View.VISIBLE
-        binding.txtCityName.text = viewModel.getCityName(viewModel.location)
+        binding.txtCityName.text = viewModel.getAdminArea(viewModel.location)
         binding.txtTemp.text = "${data.current?.temp}\u00B0"
         binding.txtWeatherDesc.text = "${current?.main}"
         binding.imgIcon.setImageResource(SimpleUtils.getIconResourceId(current?.icon?:""))
-        binding.txtTime.text = "${getString(R.string.last_update)}: ${SimpleUtils.currentDateTime}"
+        var dateTime = SimpleUtils.convertUnixTimeStamp(data.current?.dt?.toLong(),
+            data.timezone)
+        binding.txtTime.text = "${getString(R.string.last_update)}: ${dateTime.first} ${dateTime.second}"
+
+        Log.i(tag, SimpleUtils.convertUnixTimeStamp(data.current?.dt?.toLong(),
+            data.timezone).toString())
         binding.txtHumidity.text = data.current?.humidity?.toString()
         binding.txtPressure.text = data.current?.pressure?.toString()
         binding.txtVisibility.text = data.current?.visibility?.toString()
         binding.txtWindSpeed.text = data.current?.windSpeed?.toString()
-        Log.i(TAG, "updateUI: ${data.current?.windSpeed?.toString()}")
+        Log.i(tag, "updateUI: ${data.current?.windSpeed?.toString()}")
         data.current?.weather?.get(0)?.id?.let {
-            if(it >= 300 && it <= 531){
+          /*  if(it >= 300 && it <= 531){
                 binding.lottieHome.setAnimation(R.raw.rain_animation)
                 binding.lottieHome.visibility = View.VISIBLE
             }
@@ -111,9 +116,9 @@ class WeatherFragment : Fragment() {
             }
             else{
                 binding.lottieHome.visibility = View.INVISIBLE
-            }
+            }*/
         }
-        setupRecyclerViews()
+        setupRecyclerViews(data.timezone!!)
     }
 
     private fun setupViewModel(){
@@ -121,8 +126,9 @@ class WeatherFragment : Fragment() {
             WeatherRepositoryImpl.getInstance(FavLocationLocalDataSourceImpl.getInstance(requireContext())))
         viewModel = ViewModelProvider(activity as ViewModelStoreOwner, viewModelFactory).get(SharedViewModel::class.java)
     }
-    private fun setupRecyclerViews(){
+    private fun setupRecyclerViews(timeZone: String){
         hourlyAdapter = HourlyRecyclerViewAdapter(requireContext())
+        hourlyAdapter.setTimeZone(timeZone)
         hourlyAdapter.submitList(response.hourly)
         binding.recyclerViewHourly.apply {
             val linearLayout = LinearLayoutManager(context)

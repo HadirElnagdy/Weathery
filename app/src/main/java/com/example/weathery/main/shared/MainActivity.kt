@@ -5,20 +5,17 @@ import android.location.Location
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
 import com.example.weathery.R
-import com.example.weathery.database.FavLocationLocalDataSource
-import com.example.weathery.database.FavLocationLocalDataSourceImpl
+import com.example.weathery.data.database.FavLocationLocalDataSourceImpl
 import com.example.weathery.databinding.ActivityMainBinding
-import com.example.weathery.models.WeatherRepositoryImpl
+import com.example.weathery.data.repositories.WeatherRepositoryImpl
 
 
 class MainActivity : AppCompatActivity() {

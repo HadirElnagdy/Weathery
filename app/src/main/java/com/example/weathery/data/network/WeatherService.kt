@@ -1,6 +1,6 @@
-package com.example.weathery.network
+package com.example.weathery.data.network
 
-import com.example.weathery.models.WeatherResponse
+import com.example.weathery.data.models.WeatherResponse
 import com.example.weathery.BuildConfig
 import com.example.weathery.utils.Constants
 import retrofit2.Response

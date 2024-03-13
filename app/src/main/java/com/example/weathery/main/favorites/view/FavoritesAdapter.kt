@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weathery.R
 import com.example.weathery.databinding.FavCellBinding
-import com.example.weathery.models.FavLocationsWeather
+import com.example.weathery.data.models.FavLocationsWeather
 import com.example.weathery.utils.SimpleUtils
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator
 
@@ -19,8 +19,9 @@ import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator
 class FavoritesAdapter(
     private var context: Context,
     private var onSwipeDelete: (FavLocationsWeather) -> Unit,
+    private var onClick: (FavLocationsWeather) -> Unit
 ):
-    ListAdapter<FavLocationsWeather, FavViewHolder>(WeatherDiffUtil()){
+    ListAdapter<FavLocationsWeather, FavViewHolder>(WeatherDiffUtil()), ItemTouchHelperAdapter{
 
     lateinit var binding: FavCellBinding
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavViewHolder {
@@ -37,10 +38,12 @@ class FavoritesAdapter(
         holder.binding.txtFavWeather.text = currentItem.forecast?.current?.weather?.get(0)?.main
         holder.binding.imgFav.setImageResource(SimpleUtils.getIconResourceId(currentItem.forecast?.current?.weather?.get(0)?.icon?:""))
     }
-    /*override fun onItemDismiss(position: Int) {
+
+
+    override fun onItemDismiss(position: Int) {
         val currentItem = currentList[position]
         onSwipeDelete(currentItem)
-    }*/
+    }
 
 }
 
@@ -54,30 +57,6 @@ class WeatherDiffUtil: DiffUtil.ItemCallback<FavLocationsWeather>() {
         return oldItem == newItem
     }
 }
-abstract class SwipeGesture(var context: Context): ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
-    override fun onMove(
-        recyclerView: RecyclerView,
-        viewHolder: RecyclerView.ViewHolder,
-        target: RecyclerView.ViewHolder,
-    ): Boolean {
-        return false
-    }
-
-    override fun onChildDraw(
-        c: Canvas,
-        recyclerView: RecyclerView,
-        viewHolder: RecyclerView.ViewHolder,
-        dX: Float,
-        dY: Float,
-        actionState: Int,
-        isCurrentlyActive: Boolean,
-    ) {
-        RecyclerViewSwipeDecorator.Builder(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
-            .addBackgroundColor(ContextCompat.getColor(context, R.color.red))
-            .addActionIcon(R.drawable.ic_del)
-            .create()
-            .decorate()
-        super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
-    }
-
+interface ItemTouchHelperAdapter {
+    fun onItemDismiss(position: Int)
 }

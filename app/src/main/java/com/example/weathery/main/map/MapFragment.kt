@@ -11,10 +11,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
 import androidx.navigation.fragment.findNavController
 import com.example.weathery.R
-import com.example.weathery.database.FavLocationLocalDataSourceImpl
+import com.example.weathery.data.database.FavLocationLocalDataSourceImpl
 import com.example.weathery.main.shared.SharedViewModel
 import com.example.weathery.main.shared.SharedViewModelFactory
-import com.example.weathery.models.WeatherRepositoryImpl
+import com.example.weathery.data.repositories.WeatherRepositoryImpl
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback

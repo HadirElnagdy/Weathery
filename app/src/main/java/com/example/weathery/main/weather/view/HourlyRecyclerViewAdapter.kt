@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.weathery.databinding.HourlyCellBinding
-import com.example.weathery.models.HourlyItem
+import com.example.weathery.data.models.HourlyItem
 import com.example.weathery.utils.SimpleUtils
 import java.text.SimpleDateFormat
 import java.util.*
@@ -17,6 +17,7 @@ class HourlyRecyclerViewAdapter(var context: Context):
     ListAdapter<HourlyItem, HourlyViewHolder>(MyDiffUtil()){
 
     lateinit var binding: HourlyCellBinding
+    lateinit var timeZoneId: String
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HourlyViewHolder {
         val inflater: LayoutInflater =
@@ -27,21 +28,18 @@ class HourlyRecyclerViewAdapter(var context: Context):
 
     override fun onBindViewHolder(holder: HourlyViewHolder, position: Int) {
         val currentHour = getItem(position)
-        currentHour.dt?.let {
-            val date = Date(it.toLong()*1000)
-            val calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"))
-            calendar.time = date
-            val sdf = SimpleDateFormat("hh a")
-            sdf.timeZone = TimeZone.getTimeZone("UTC")
-            val formattedHour = sdf.format(date)
-            holder.binding.txtHour.text = formattedHour.toString()
-
+            currentHour.dt?.let {
+            holder.binding.txtHour.text = SimpleUtils.convertUnixTimeStamp(it.toLong(), timeZoneId).second
         }
         holder.binding.txtCellTemp.text = currentHour.temp.toString()
         holder.binding.imgCellIcon.setImageResource(
             SimpleUtils
             .getIconResourceId(currentHour?.weather?.get(0)?.icon?:""))
 
+    }
+
+    fun setTimeZone(timeZoneId: String){
+        this.timeZoneId = timeZoneId
     }
 
 }

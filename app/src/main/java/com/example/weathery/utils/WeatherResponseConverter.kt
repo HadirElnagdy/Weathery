@@ -1,7 +1,7 @@
 package com.example.weathery.utils
 
 import androidx.room.TypeConverter
-import com.example.weathery.models.WeatherResponse
+import com.example.weathery.data.models.WeatherResponse
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 

@@ -1,6 +1,6 @@
 package com.example.weathery.utils
 
-import com.example.weathery.models.WeatherResponse
+import com.example.weathery.data.models.WeatherResponse
 
 
 sealed class ApiState {

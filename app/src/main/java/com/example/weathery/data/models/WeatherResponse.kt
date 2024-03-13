@@ -1,4 +1,4 @@
-package com.example.weathery.models
+package com.example.weathery.data.models
 
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
@@ -98,6 +98,6 @@ data class DailyItem(
     val sunset: Int? = null,
     val weather: List<WeatherItem?>? = null,
     val humidity: Int? = null,
-    val windSpeed: Any? = "--"
+    val windSpeed: Double? = null
 )
 

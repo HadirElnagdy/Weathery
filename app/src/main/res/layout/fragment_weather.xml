@@ -7,16 +7,7 @@
     android:background="@color/my_primary_color"
     tools:context=".main.weather.view.WeatherFragment">
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/lottie_home"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="invisible"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="true"
-        app:lottie_rawRes="@raw/rain_animation" />
+
 
     <ScrollView
         android:id="@+id/scrollView3"
@@ -33,7 +24,7 @@
             android:layout_height="wrap_content">
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/cardView1"
+                android:id="@+id/cardView10"
                 android:layout_width="330dp"
                 android:layout_height="232dp"
                 android:layout_marginStart="32dp"
@@ -120,7 +111,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/cardView2"
+                android:id="@+id/cardView20"
                 android:layout_width="330dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
@@ -130,7 +121,7 @@
                 app:cardCornerRadius="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cardView1">
+                app:layout_constraintTop_toBottomOf="@+id/cardView10">
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_view_hourly"
@@ -149,7 +140,7 @@
                 app:cardCornerRadius="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cardView2">
+                app:layout_constraintTop_toBottomOf="@+id/cardView20">
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_view_daily"
@@ -158,7 +149,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@id/cardView4"
+                android:id="@id/cardView40"
                 android:layout_width="160dp"
                 android:layout_height="80dp"
                 android:layout_marginStart="32dp"
@@ -208,14 +199,14 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@id/cardView5"
+                android:id="@+id/cardView0"
                 android:layout_width="160dp"
                 android:layout_height="80dp"
                 android:layout_marginEnd="32dp"
                 android:backgroundTint="@color/my_secondary_color"
                 app:cardCornerRadius="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/cardView4">
+                app:layout_constraintTop_toTopOf="@+id/cardView40">
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -257,7 +248,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@id/cardView6"
+                android:id="@+id/cardView60"
                 android:layout_width="160dp"
                 android:layout_height="80dp"
                 android:layout_marginStart="32dp"
@@ -267,7 +258,7 @@
                 app:cardCornerRadius="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cardView4">
+                app:layout_constraintTop_toBottomOf="@+id/cardView40">
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -309,14 +300,14 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@id/cardView"
+                android:id="@+id/cardView30"
                 android:layout_width="160dp"
                 android:layout_height="80dp"
                 android:layout_marginEnd="32dp"
                 android:backgroundTint="@color/my_secondary_color"
                 app:cardCornerRadius="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/cardView6">
+                app:layout_constraintTop_toTopOf="@+id/cardView60">
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout

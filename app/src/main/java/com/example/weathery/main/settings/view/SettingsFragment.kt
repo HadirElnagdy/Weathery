@@ -6,9 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.weathery.R
+import com.example.weathery.databinding.FragmentSettingsBinding
 
 class SettingsFragment : Fragment() {
 
+    lateinit var binding: FragmentSettingsBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -1,4 +1,4 @@
-package com.example.weathery.models
+package com.example.weathery.data.models
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

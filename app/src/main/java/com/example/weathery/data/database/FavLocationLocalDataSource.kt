@@ -1,21 +1,21 @@
-package com.example.weathery.database
+package com.example.weathery.data.database
 
 import android.content.Context
-import com.example.weathery.models.FavLocationsWeather
+import com.example.weathery.data.models.FavLocationsWeather
 import kotlinx.coroutines.flow.Flow
 
 interface FavLocationLocalDataSource{
     fun getAllFavorites(): Flow<List<FavLocationsWeather>>
     suspend fun insertFavorite(favorite: FavLocationsWeather)
-    suspend fun updateFavorite(favorite: FavLocationsWeather)
     suspend fun deleteFavorite(favorite: FavLocationsWeather)
 }
 
-class FavLocationLocalDataSourceImpl private constructor(context: Context): FavLocationLocalDataSource {
+class FavLocationLocalDataSourceImpl private constructor(context: Context):
+    FavLocationLocalDataSource {
     companion object{
         private var instance: FavLocationLocalDataSourceImpl? = null
         fun getInstance (context: Context): FavLocationLocalDataSourceImpl {
-            return instance?: synchronized(this){
+            return instance ?: synchronized(this){
                 val temp = FavLocationLocalDataSourceImpl(context)
                 instance = temp
                 temp
@@ -33,10 +33,6 @@ class FavLocationLocalDataSourceImpl private constructor(context: Context): FavL
 
     override suspend fun insertFavorite(favorite: FavLocationsWeather) {
         favLocationDao.insertFavorite(favorite)
-    }
-
-    override suspend fun updateFavorite(favorite: FavLocationsWeather) {
-        favLocationDao.updateFavorite(favorite)
     }
 
     override suspend fun deleteFavorite(favorite: FavLocationsWeather) {
