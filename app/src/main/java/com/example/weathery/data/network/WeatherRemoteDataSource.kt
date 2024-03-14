@@ -7,11 +7,15 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 
 interface WeatherRemoteDataSource {
-    suspend fun getWeatherForecast(lon: Double, lat: Double) : Flow<WeatherResponse>
+    suspend fun getWeatherForecast(lon: Double,
+                                   lat: Double,
+                                   lang: String? = null,
+                                   units: String? = null) : Flow<WeatherResponse>
 }
 
 object WeatherRemoteDataSourceImpl: WeatherRemoteDataSource {
-    override suspend fun getWeatherForecast(lon: Double, lat: Double) = flow<WeatherResponse> {
-        emit(RetrofitHelper.retrofitWeatherService.getWeatherForecast(lon, lat).body()!!)
+    override suspend fun getWeatherForecast(lon: Double, lat: Double, lang: String?, units: String?) = flow<WeatherResponse> {
+        emit(RetrofitHelper.retrofitWeatherService.getWeatherForecast(lon, lat, lang, units).body()!!)
     }.flowOn(Dispatchers.IO)
 }
+

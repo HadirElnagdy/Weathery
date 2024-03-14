@@ -4,5 +4,5 @@ data class Settings(
     val language: String,
     val notificationEnabled: Boolean,
     val units: String,
-    val locationMode: String
+/*    val locationMode: String*/
 )

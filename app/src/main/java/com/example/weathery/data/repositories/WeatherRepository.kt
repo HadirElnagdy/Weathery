@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 
 interface WeatherRepository {
-    suspend fun getWeatherForecast(lon: Double, lat: Double) : Flow<WeatherResponse>
+    suspend fun getWeatherForecast(lon: Double, lat: Double, lang: String? = null, units: String? = null) : Flow<WeatherResponse>
     fun getAllFavorites(): Flow<List<FavLocationsWeather>>
     suspend fun insertFavorite(favorite: FavLocationsWeather)
     suspend fun deleteFavorite(favorite: FavLocationsWeather)
@@ -33,7 +33,11 @@ class WeatherRepositoryImpl private constructor(private val localDataSource: Fav
             }
         }
     }
-    override suspend fun getWeatherForecast(lon: Double, lat: Double) = remoteDataSource.getWeatherForecast(lon, lat)
+    override suspend fun getWeatherForecast(lon: Double,
+                                            lat: Double,
+                                            lang: String?,
+                                            units: String?) = remoteDataSource
+                                                .getWeatherForecast(lon, lat, lang, units)
 
     override fun getAllFavorites(): Flow<List<FavLocationsWeather>> = localDataSource.getAllFavorites()
 
