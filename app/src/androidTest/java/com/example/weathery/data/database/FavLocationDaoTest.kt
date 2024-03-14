@@ -55,7 +55,7 @@ class FavLocationDaoTest {
     }
 
     @Test
-    fun deleteProductAndGetProduct() = runBlockingTest {
+    fun deleteFavoriteAndGetFavorite() = runBlockingTest {
 
        //Given
         val fav = FavLocationsWeather("Cairo Governorate")

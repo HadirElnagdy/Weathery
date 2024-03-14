@@ -1,12 +1,16 @@
 package com.example.weathery.main.shared
 
 import android.app.Application
+import android.location.Location
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.example.weathery.data.models.WeatherResponse
 import com.example.weathery.data.repositories.FakeWeatherRepository
 import com.example.weathery.data.repositories.WeatherRepository
 import kotlinx.coroutines.test.runBlockingTest
+import org.hamcrest.CoreMatchers.`is`
+import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -29,15 +33,11 @@ class WeatherViewModelTest {
     }
 
     @Test
-    fun getAllFavs_returnsWeatherResponse() = runBlockingTest{
-        viewModel.getAllFavs()
-    }
+    fun getAllFavs_location_returnsWeatherResponseWithSameLocation() = runBlockingTest{
 
-            /*fun getAllFavs() = viewModelScope.launch(Dispatchers.IO) {
-        repository.getAllFavorites().collectLatest{
-            _mutableFavList.postValue(it)
-        }
-    }*/
+
+
+    }
 
 
 
