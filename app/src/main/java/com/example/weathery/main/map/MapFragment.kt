@@ -12,8 +12,9 @@ import androidx.lifecycle.ViewModelStoreOwner
 import androidx.navigation.fragment.findNavController
 import com.example.weathery.R
 import com.example.weathery.data.database.FavLocationLocalDataSourceImpl
-import com.example.weathery.main.shared.SharedViewModel
-import com.example.weathery.main.shared.SharedViewModelFactory
+import com.example.weathery.data.network.WeatherRemoteDataSourceImpl
+import com.example.weathery.main.shared.WeatherViewModel
+import com.example.weathery.main.shared.WeatherViewModelFactory
 import com.example.weathery.data.repositories.WeatherRepositoryImpl
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -27,8 +28,8 @@ import com.google.android.material.snackbar.Snackbar
 class MapFragment : Fragment(), OnMapReadyCallback {
 
     private lateinit var googleMap: GoogleMap
-    lateinit var viewModelFactory: SharedViewModelFactory
-    lateinit var viewModel: SharedViewModel
+    lateinit var viewModelFactory: WeatherViewModelFactory
+    lateinit var viewModel: WeatherViewModel
     private val TAG = "MapFragment"
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -87,9 +88,10 @@ class MapFragment : Fragment(), OnMapReadyCallback {
     }
 
     private fun setupViewModel(){
-        viewModelFactory = SharedViewModelFactory(requireActivity().application,
-            WeatherRepositoryImpl.getInstance(FavLocationLocalDataSourceImpl.getInstance(requireContext())))
-        viewModel = ViewModelProvider(activity as ViewModelStoreOwner, viewModelFactory).get(SharedViewModel::class.java)
+        viewModelFactory = WeatherViewModelFactory(requireActivity().application,
+            WeatherRepositoryImpl.getInstance(FavLocationLocalDataSourceImpl.getInstance(requireContext()),
+                WeatherRemoteDataSourceImpl))
+        viewModel = ViewModelProvider(activity as ViewModelStoreOwner, viewModelFactory).get(WeatherViewModel::class.java)
     }
 
 }

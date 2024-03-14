@@ -1,5 +1,6 @@
 package com.example.weathery.main.favorites.view
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Canvas
 import android.view.LayoutInflater
@@ -31,12 +32,16 @@ class FavoritesAdapter(
         return FavViewHolder(binding)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: FavViewHolder, position: Int) {
         val currentItem = getItem(position)
         holder.binding.txtFavCity.text = currentItem.locality
-        holder.binding.txtFavTemp.text = currentItem.forecast?.current?.temp.toString()
+        holder.binding.txtFavTemp.text = "${currentItem.forecast?.current?.temp.toString()} \u00B0"
         holder.binding.txtFavWeather.text = currentItem.forecast?.current?.weather?.get(0)?.main
         holder.binding.imgFav.setImageResource(SimpleUtils.getIconResourceId(currentItem.forecast?.current?.weather?.get(0)?.icon?:""))
+        holder.binding.root.setOnClickListener {
+            onClick(currentItem)
+        }
     }
 
 

@@ -15,12 +15,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.weathery.R
 import com.example.weathery.data.database.FavLocationLocalDataSourceImpl
 import com.example.weathery.databinding.FragmentWeatherBinding
-import com.example.weathery.main.shared.SharedViewModel
-import com.example.weathery.main.shared.SharedViewModelFactory
+import com.example.weathery.main.shared.WeatherViewModel
+import com.example.weathery.main.shared.WeatherViewModelFactory
 import com.example.weathery.data.repositories.WeatherRepositoryImpl
 import com.example.weathery.utils.ApiState
 import com.example.weathery.utils.NetworkUtils
 import com.example.weathery.data.models.WeatherResponse
+import com.example.weathery.data.network.WeatherRemoteDataSourceImpl
 import com.example.weathery.utils.SimpleUtils
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -29,8 +30,8 @@ import kotlinx.coroutines.launch
 class WeatherFragment : Fragment() {
 
     private lateinit var binding: FragmentWeatherBinding
-    private lateinit var viewModelFactory: SharedViewModelFactory
-    private lateinit var viewModel: SharedViewModel
+    private lateinit var viewModelFactory: WeatherViewModelFactory
+    private lateinit var viewModel: WeatherViewModel
     private lateinit var hourlyAdapter: HourlyRecyclerViewAdapter
     private lateinit var dailyAdapter: DailyRecyclerViewAdapter
     private lateinit var response: WeatherResponse
@@ -60,6 +61,10 @@ class WeatherFragment : Fragment() {
             Log.i(tag, "onViewCreated: No Network here!!!")
         }
 
+    }
+
+    override fun onResume() {
+        super.onResume()
     }
 
     private fun observeWeatherForecast(){
@@ -97,9 +102,6 @@ class WeatherFragment : Fragment() {
         var dateTime = SimpleUtils.convertUnixTimeStamp(data.current?.dt?.toLong(),
             data.timezone)
         binding.txtTime.text = "${getString(R.string.last_update)}: ${dateTime.first} ${dateTime.second}"
-
-        Log.i(tag, SimpleUtils.convertUnixTimeStamp(data.current?.dt?.toLong(),
-            data.timezone).toString())
         binding.txtHumidity.text = data.current?.humidity?.toString()
         binding.txtPressure.text = data.current?.pressure?.toString()
         binding.txtVisibility.text = data.current?.visibility?.toString()
@@ -122,9 +124,10 @@ class WeatherFragment : Fragment() {
     }
 
     private fun setupViewModel(){
-        viewModelFactory = SharedViewModelFactory(requireActivity().application,
-            WeatherRepositoryImpl.getInstance(FavLocationLocalDataSourceImpl.getInstance(requireContext())))
-        viewModel = ViewModelProvider(activity as ViewModelStoreOwner, viewModelFactory).get(SharedViewModel::class.java)
+        viewModelFactory = WeatherViewModelFactory(requireActivity().application,
+            WeatherRepositoryImpl.getInstance(FavLocationLocalDataSourceImpl.getInstance(requireContext()),
+                WeatherRemoteDataSourceImpl))
+        viewModel = ViewModelProvider(activity as ViewModelStoreOwner, viewModelFactory).get(WeatherViewModel::class.java)
     }
     private fun setupRecyclerViews(timeZone: String){
         hourlyAdapter = HourlyRecyclerViewAdapter(requireContext())

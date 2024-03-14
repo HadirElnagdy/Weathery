@@ -14,6 +14,7 @@ import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
 import com.example.weathery.R
 import com.example.weathery.data.database.FavLocationLocalDataSourceImpl
+import com.example.weathery.data.network.WeatherRemoteDataSourceImpl
 import com.example.weathery.databinding.ActivityMainBinding
 import com.example.weathery.data.repositories.WeatherRepositoryImpl
 
@@ -22,16 +23,17 @@ class MainActivity : AppCompatActivity() {
 
     private val TAG = "MainActivity"
     private lateinit var binding: ActivityMainBinding
-    lateinit var viewModelFactory: SharedViewModelFactory
-    lateinit var viewModel: SharedViewModel
+    lateinit var viewModelFactory: WeatherViewModelFactory
+    lateinit var viewModel: WeatherViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        viewModelFactory = SharedViewModelFactory(this.application
-            , WeatherRepositoryImpl.getInstance(FavLocationLocalDataSourceImpl.getInstance(this)))
-        viewModel = ViewModelProvider(this as ViewModelStoreOwner, viewModelFactory).get(SharedViewModel::class.java)
+        viewModelFactory = WeatherViewModelFactory(this.application
+            , WeatherRepositoryImpl.getInstance(FavLocationLocalDataSourceImpl.getInstance(this),
+                WeatherRemoteDataSourceImpl))
+        viewModel = ViewModelProvider(this as ViewModelStoreOwner, viewModelFactory).get(WeatherViewModel::class.java)
 
         val location = intent.getParcelableExtra("location") as? Location
         Log.i(TAG, "onCreate: ${location.toString()}")

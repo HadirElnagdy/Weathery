@@ -16,11 +16,12 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import java.io.IOException
 import java.lang.IllegalArgumentException
 
-class SharedViewModel(private val app: Application, private val repository: WeatherRepository) : ViewModel() {
+class WeatherViewModel(private val app: Application, private val repository: WeatherRepository) : ViewModel() {
 
     private var _mutableForecast = MutableStateFlow<ApiState>(ApiState.Loading)
     val forecast = _mutableForecast.asStateFlow()
@@ -32,15 +33,18 @@ class SharedViewModel(private val app: Application, private val repository: Weat
     private val TAG = "SharedViewModel"
 
     fun getAllFavs() = viewModelScope.launch(Dispatchers.IO) {
-        repository.getAllFavorites().collect{
+        repository.getAllFavorites().collectLatest{
             _mutableFavList.postValue(it)
         }
     }
 
     fun addToFav(location: Location) {
         viewModelScope.launch(Dispatchers.IO) {
-            val fav = FavLocationsWeather(getAdminArea(location))
-            repository.insertFavorite(fav)
+            val weatherResponse = repository.getWeatherForecast(location.longitude, location.latitude)
+            weatherResponse.collectLatest {
+                val fav = FavLocationsWeather(getAdminArea(location), it)
+                repository.insertFavorite(fav)
+            }
         }
     }
 
@@ -52,7 +56,7 @@ class SharedViewModel(private val app: Application, private val repository: Weat
 
     fun getForecast(location: Location?) = viewModelScope.launch(Dispatchers.IO) {
         Log.i(TAG, "getForecast: ${location.toString()}")
-        this@SharedViewModel.location = location
+        this@WeatherViewModel.location = location
         location?.let {
             repository.getWeatherForecast(it.longitude, it.latitude)
                 .catch {
@@ -82,10 +86,10 @@ class SharedViewModel(private val app: Application, private val repository: Weat
 
 }
 
-class SharedViewModelFactory(private val app: Application, private val repo: WeatherRepository): ViewModelProvider.Factory {
+class WeatherViewModelFactory(private val app: Application, private val repo: WeatherRepository): ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return if (modelClass.isAssignableFrom(SharedViewModel::class.java)){
-            SharedViewModel(app, repo) as T
+        return if (modelClass.isAssignableFrom(WeatherViewModel::class.java)){
+            WeatherViewModel(app, repo) as T
         }else{
             throw IllegalArgumentException("View Model is not found")
         }

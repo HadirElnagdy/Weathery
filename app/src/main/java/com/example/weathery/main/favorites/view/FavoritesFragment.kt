@@ -1,6 +1,7 @@
 package com.example.weathery.main.favorites.view
 
 import android.graphics.Canvas
+import android.location.Location
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -14,9 +15,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weathery.R
 import com.example.weathery.data.database.FavLocationLocalDataSourceImpl
+import com.example.weathery.data.network.WeatherRemoteDataSourceImpl
 import com.example.weathery.databinding.FragmentFavoritesBinding
-import com.example.weathery.main.shared.SharedViewModel
-import com.example.weathery.main.shared.SharedViewModelFactory
+import com.example.weathery.main.shared.WeatherViewModel
+import com.example.weathery.main.shared.WeatherViewModelFactory
 import com.example.weathery.data.repositories.WeatherRepositoryImpl
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator
 
@@ -24,8 +26,8 @@ import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator
 class FavoritesFragment : Fragment() {
 
     lateinit var binding: FragmentFavoritesBinding
-    lateinit var viewModelFactory: SharedViewModelFactory
-    lateinit var viewModel: SharedViewModel
+    lateinit var viewModelFactory: WeatherViewModelFactory
+    lateinit var viewModel: WeatherViewModel
     lateinit var favAdapter: FavoritesAdapter
 
     override fun onCreateView(
@@ -46,16 +48,21 @@ class FavoritesFragment : Fragment() {
     }
 
     private fun setupViewModel() {
-        viewModelFactory = SharedViewModelFactory(requireActivity().application,
-            WeatherRepositoryImpl.getInstance(FavLocationLocalDataSourceImpl.getInstance(requireContext())))
-        viewModel = ViewModelProvider(this, viewModelFactory).get(SharedViewModel::class.java)
+        viewModelFactory = WeatherViewModelFactory(requireActivity().application,
+            WeatherRepositoryImpl.getInstance(FavLocationLocalDataSourceImpl.getInstance(requireContext()),
+                WeatherRemoteDataSourceImpl))
+        viewModel = ViewModelProvider(this, viewModelFactory).get(WeatherViewModel::class.java)
     }
 
 
     private fun setupRecyclerView() {
         favAdapter = FavoritesAdapter(requireContext(),
             { viewModel.delFromFav(it) }) {
-            //navigate to home with that fav location weather
+            val location = Location("fav")
+            location.longitude = it.forecast?.lon as Double
+            location.latitude = it.forecast?.lat as Double
+            val action = FavoritesFragmentDirections.actionFavoritesFragmentToWeatherFragment(location)
+            findNavController().navigate(action)
         }
 
         val itemTouchHelperCallback = object : ItemTouchHelper.SimpleCallback(

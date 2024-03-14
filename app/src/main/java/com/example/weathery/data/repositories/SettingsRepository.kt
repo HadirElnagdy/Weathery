@@ -1,4 +1,9 @@
 package com.example.weathery.data.repositories
 
-class SettingsRepository {
+interface SettingsRepository {
+
+}
+
+class SettingsRepositoryImpl: SettingsRepository{
+
 }

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+        <string name="app_name">ويزري</string>
+        <string name="hello_blank_fragment">مرحبًا بالشاشة الفارغة</string>
+        <string name="location">الموقع</string>
+        <string name="notifications">الإشعارات</string>
+        <string name="units">الوحدات</string>
+        <string name="language">اللغة</string>
+        <string name="gps">نظام تحديد المواقع</string>
+        <string name="map">الخريطة</string>
+        <string name="english">الإنجليزية</string>
+        <string name="arabic">العربية</string>
+        <string name="metric">المتري</string>
+        <string name="imperial">الإمبراطورية</string>
+        <string name="standard">القياسية</string>
+        <string name="enable">تفعيل</string>
+        <string name="disable">تعطيل</string>
+        <string name="home">الصفحة الرئيسية</string>
+        <string name="fav">المفضلة</string>
+        <string name="settings">الإعدادات</string>
+        <string name="alert">تنبيه</string>
+        <string name="alarm">التنبيهات</string>
+        <string name="no_favorites_yet">لا توجد مفضلة حتى الآن!</string>
+        <string name="no_alarm_yet">لا توجد تنبيهات حتى الآن!</string>
+        <string name="humidity">الرطوبة</string>
+        <string name="wind_speed">سرعة الرياح</string>
+        <string name="pressure">الضغط</string>
+        <string name="last_update">آخر تحديث</string>
+        <string name="visibility">الرؤية</string>
+        <string name="low">أدنى: </string>
+        <string name="high">أعلى: </string>
+        <string name="today">اليوم</string>
+</resources>

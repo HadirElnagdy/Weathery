@@ -1,5 +1,8 @@
 package com.example.weathery.utils
 
+import androidx.datastore.preferences.core.booleanPreferencesKey
+import androidx.datastore.preferences.core.stringPreferencesKey
+
 class Constants {
     companion object{
 
@@ -9,6 +12,7 @@ class Constants {
         const val LANG_ARABIC_KEY = "ar"
         const val UNITS_IMPERIAL_KEY = "imperial"
         const val UNITS_METRIC_KEY = "metric"
+
 
     }
 

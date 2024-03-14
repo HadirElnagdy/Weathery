@@ -9,7 +9,13 @@
         android:id="@+id/weatherFragment"
         android:name="com.example.weathery.main.weather.view.WeatherFragment"
         android:label="@string/home"
-        tools:layout="@layout/fragment_weather" />
+        tools:layout="@layout/fragment_weather" >
+        <argument
+            android:name="locationFav"
+            app:argType="android.location.Location"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
     <fragment
         android:id="@+id/favoritesFragment"
         android:name="com.example.weathery.main.favorites.view.FavoritesFragment"
