@@ -30,9 +30,9 @@
     </fragment>
     <fragment
         android:id="@+id/alertsFragment"
-        android:name="com.example.weathery.main.alarm.view.AlarmsFragment"
+        android:name="com.example.weathery.main.alert.view.AlertsFragment"
         android:label="@string/alert"
-        tools:layout="@layout/fragment_alarms" />
+        tools:layout="@layout/fragment_alerts" />
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.example.weathery.main.settings.view.SettingsFragment"
