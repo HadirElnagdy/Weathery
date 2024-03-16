@@ -1,11 +1,16 @@
 package com.example.weathery.data.database
 
 import com.example.weathery.data.models.FavLocationsWeather
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
 class FakeFavLocalDataSource(): FavLocationLocalDataSource {
 
     private val favorites: MutableList<FavLocationsWeather> = mutableListOf()
+    override fun getHome(): Flow<FavLocationsWeather> {
+        TODO("Not yet implemented")
+    }
+
     override fun getAllFavorites() = flow {
             emit(favorites)
     }

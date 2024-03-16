@@ -17,6 +17,7 @@ import com.example.weathery.data.database.FavLocationLocalDataSourceImpl
 import com.example.weathery.data.network.WeatherRemoteDataSourceImpl
 import com.example.weathery.databinding.ActivityMainBinding
 import com.example.weathery.data.repositories.WeatherRepositoryImpl
+import com.example.weathery.utils.NetworkUtils
 
 
 class MainActivity : AppCompatActivity() {
@@ -54,13 +55,22 @@ class MainActivity : AppCompatActivity() {
     }
     fun setupActionBar(){
         val actionBar = supportActionBar
-        actionBar?.let {
-            it.setHomeAsUpIndicator(R.drawable.ic_menu)
-            it.setDisplayShowHomeEnabled(true)
-            it.setDisplayHomeAsUpEnabled(true)
-            it.setDisplayShowTitleEnabled(false)
-            it.setBackgroundDrawable(ColorDrawable(ContextCompat.getColor(this, R.color.transparent)))
-        }
+        val networkAvailable = NetworkUtils.isNetworkAvailable(this)
+            actionBar?.let {
+                it.setHomeAsUpIndicator(R.drawable.ic_menu)
+                it.setDisplayShowHomeEnabled(networkAvailable)
+                it.setDisplayHomeAsUpEnabled(networkAvailable)
+                it.setDisplayShowTitleEnabled(false)
+                it.setBackgroundDrawable(
+                    ColorDrawable(
+                        ContextCompat.getColor(
+                            this,
+                            R.color.transparent
+                        )
+                    )
+                )
+            }
+
     }
     fun setupNavigation(){
         val navController = Navigation.findNavController(this, R.id.nav_host_fragment)

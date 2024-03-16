@@ -3,8 +3,10 @@ package com.example.weathery.data.database
 import android.content.Context
 import com.example.weathery.data.models.FavLocationsWeather
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 
 interface FavLocationLocalDataSource{
+    fun getHome(): Flow<FavLocationsWeather>
     fun getAllFavorites(): Flow<List<FavLocationsWeather>>
     suspend fun insertFavorite(favorite: FavLocationsWeather)
     suspend fun deleteFavorite(favorite: FavLocationsWeather)
@@ -26,10 +28,15 @@ class FavLocationLocalDataSourceImpl private constructor(context: Context):
         WeatherDatabase.getInstance(context).getFavDao()
     }
 
-
-    override fun getAllFavorites(): Flow<List<FavLocationsWeather>> {
-        return favLocationDao.getAllFavorites()
+    override fun getHome(): Flow<FavLocationsWeather> = favLocationDao.getAllFavorites().map { favorites ->
+        favorites.filter { it.forecast?.current?.uvi == "Home" }.get(0)
     }
+
+
+    override fun getAllFavorites(): Flow<List<FavLocationsWeather>> = favLocationDao.getAllFavorites().map { favorites ->
+        favorites.filter { it.forecast?.current?.uvi != "Home" }
+    }
+
 
     override suspend fun insertFavorite(favorite: FavLocationsWeather) {
         favLocationDao.insertFavorite(favorite)

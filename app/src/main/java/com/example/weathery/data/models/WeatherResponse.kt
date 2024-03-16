@@ -1,8 +1,5 @@
 package com.example.weathery.data.models
 
-import com.google.gson.annotations.SerializedName
-import java.io.Serializable
-
 
 data class WeatherResponse (
     val current: Current? = null,
@@ -19,7 +16,7 @@ data class Current(
     val sunrise: Int? = null,
     val temp: Any? = "--",
     val visibility: Int? = null,
-    val uvi: Any? = null, //we can use this as an ID
+    var uvi: Any? = null, //we can use this as an ID
     val pressure: Int? = null,
     val clouds: Int? = null,
     val feelsLike: Any? = null,
@@ -30,7 +27,7 @@ data class Current(
     val sunset: Int? = null,
     val weather: List<WeatherItem?>? = null,
     val humidity: Int? = null,
-    val windSpeed: Any? = "--"
+    val wind_speed: Double? = 0.0
 )
 
 data class HourlyItem(

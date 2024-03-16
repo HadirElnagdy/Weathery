@@ -28,6 +28,7 @@ import com.example.weathery.utils.Constants.Companion.LANG_ENGLISH_KEY
 import com.example.weathery.utils.Constants.Companion.UNITS_IMPERIAL_KEY
 import com.example.weathery.utils.Constants.Companion.UNITS_METRIC_KEY
 import com.example.weathery.utils.Constants.Companion.UNITS_STANDARD_KEY
+import com.example.weathery.utils.LocaleHelper
 
 class SettingsFragment : Fragment() {
 
@@ -130,7 +131,7 @@ class SettingsFragment : Fragment() {
             settingsViewModel.saveSettings(Settings(language,
                 isNotificationEnabled,
                 units))
-
+            LocaleHelper.changeLanguageLocaleTo(language)
             Toast.makeText(requireContext(), getString(R.string.changes_saved),Toast.LENGTH_SHORT).show()
         }
     }

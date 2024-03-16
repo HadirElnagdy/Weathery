@@ -21,7 +21,6 @@ import com.example.weathery.data.repositories.SettingsRepositoryImpl
 import com.example.weathery.data.repositories.WeatherRepositoryImpl
 import com.example.weathery.data.sharedpreferences.SettingsLocalDataSourceImpl
 import com.example.weathery.databinding.FragmentFavoritesDetailsBinding
-import com.example.weathery.databinding.FragmentWeatherBinding
 import com.example.weathery.main.shared.SettingsViewModel
 import com.example.weathery.main.shared.SettingsViewModelFactory
 import com.example.weathery.main.shared.WeatherViewModel
@@ -116,7 +115,7 @@ class FavoritesDetailsFragment : Fragment() {
         binding.txtFavHumidity.text = data.current?.humidity?.toString()
         binding.txtFavPressure.text = data.current?.pressure?.toString()
         binding.txtFavVisibility.text = data.current?.visibility?.toString()
-        binding.txtWindSpeedFav.text = data.current?.windSpeed?.toString()
+        binding.txtWindSpeedFav.text = data.current?.wind_speed?.toString()
         setupRecyclerViews(data.timezone!!)
     }
 

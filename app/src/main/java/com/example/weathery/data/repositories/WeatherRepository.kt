@@ -15,6 +15,7 @@ interface WeatherRepository {
     fun getAllFavorites(): Flow<List<FavLocationsWeather>>
     suspend fun insertFavorite(favorite: FavLocationsWeather)
     suspend fun deleteFavorite(favorite: FavLocationsWeather)
+    fun getHome(): Flow<FavLocationsWeather>
 
 }
 
@@ -44,6 +45,7 @@ class WeatherRepositoryImpl private constructor(private val localDataSource: Fav
     override suspend fun insertFavorite(favorite: FavLocationsWeather) = localDataSource.insertFavorite(favorite)
 
     override suspend fun deleteFavorite(favorite: FavLocationsWeather) = localDataSource.deleteFavorite(favorite)
+    override fun getHome(): Flow<FavLocationsWeather> = localDataSource.getHome()
 
 
 }

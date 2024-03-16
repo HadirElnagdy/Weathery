@@ -1,6 +1,5 @@
 package com.example.weathery.main.favorites.view
 
-import android.content.DialogInterface
 import android.graphics.Canvas
 import android.location.Location
 import android.os.Bundle

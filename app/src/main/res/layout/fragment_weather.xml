@@ -150,12 +150,14 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@id/cardView40"
-                android:layout_width="160dp"
+                android:layout_width="0dp"
                 android:layout_height="80dp"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
                 android:backgroundTint="@color/my_secondary_color"
                 app:cardCornerRadius="20dp"
+                app:layout_constraintEnd_toStartOf="@+id/cardView0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cardView3">
 
@@ -200,12 +202,14 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView0"
-                android:layout_width="160dp"
+                android:layout_width="0dp"
                 android:layout_height="80dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginEnd="32dp"
                 android:backgroundTint="@color/my_secondary_color"
                 app:cardCornerRadius="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/cardView40"
                 app:layout_constraintTop_toTopOf="@+id/cardView40">
 
 
@@ -249,14 +253,16 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView60"
-                android:layout_width="160dp"
+                android:layout_width="0dp"
                 android:layout_height="80dp"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
                 android:layout_marginBottom="32dp"
                 android:backgroundTint="@color/my_secondary_color"
                 app:cardCornerRadius="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/cardView30"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cardView40">
 
@@ -301,12 +307,14 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView30"
-                android:layout_width="160dp"
+                android:layout_width="0dp"
                 android:layout_height="80dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginEnd="32dp"
                 android:backgroundTint="@color/my_secondary_color"
                 app:cardCornerRadius="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/cardView60"
                 app:layout_constraintTop_toTopOf="@+id/cardView60">
 
 
@@ -360,4 +368,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

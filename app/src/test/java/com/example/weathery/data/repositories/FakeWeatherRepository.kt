@@ -30,4 +30,8 @@ class FakeWeatherRepository: WeatherRepository{
         favoriteList -= favorite
     }
 
+    override fun getHome(): Flow<FavLocationsWeather> {
+        TODO("Not yet implemented")
+    }
+
 }

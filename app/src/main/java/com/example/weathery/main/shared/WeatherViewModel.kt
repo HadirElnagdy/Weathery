@@ -27,6 +27,9 @@ class WeatherViewModel(private val app: Application, private val repository: Wea
     private var _mutableForecast = MutableStateFlow<ApiState>(ApiState.Loading)
     val forecast = _mutableForecast.asStateFlow()
 
+    private var _mutableSavedForecast = MutableLiveData<FavLocationsWeather>()
+    val savedHomeForecast: LiveData<FavLocationsWeather> = _mutableSavedForecast
+
     private var _mutableFavForecast = MutableStateFlow<ApiState>(ApiState.Loading)
     val favForecast = _mutableFavForecast.asStateFlow()
 
@@ -87,6 +90,20 @@ class WeatherViewModel(private val app: Application, private val repository: Wea
         }
 
     }
+
+    fun saveHomeForecast(homeForecast: FavLocationsWeather){
+        homeForecast.forecast?.current?.uvi = "Home"
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.insertFavorite(homeForecast)
+        }
+    }
+
+    fun getHomeFromDatabase() = viewModelScope.launch(Dispatchers.IO) {
+        repository.getHome().collectLatest {
+            _mutableSavedForecast.postValue(it)
+        }
+    }
+
 
     fun getAdminArea(location: Location?): String {
         val geocoder = Geocoder(app/*, Locale("ar")*/)

@@ -15,6 +15,8 @@ interface FavLocationDao {
     @Query("SELECT * FROM favorite_weather_table")
     fun getAllFavorites(): Flow<List<FavLocationsWeather>>
 
+
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertFavorite(favorite: FavLocationsWeather)
 
