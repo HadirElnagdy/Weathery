@@ -13,8 +13,8 @@ import com.example.weathery.utils.SimpleUtils
 import java.text.SimpleDateFormat
 import java.util.*
 
-class HourlyRecyclerViewAdapter(var context: Context):
-    ListAdapter<HourlyItem, HourlyViewHolder>(MyDiffUtil()){
+class HourlyRecyclerViewAdapter(var context: Context) :
+    ListAdapter<HourlyItem, HourlyViewHolder>(MyDiffUtil()) {
 
     lateinit var binding: HourlyCellBinding
     lateinit var timeZoneId: String
@@ -28,25 +28,27 @@ class HourlyRecyclerViewAdapter(var context: Context):
 
     override fun onBindViewHolder(holder: HourlyViewHolder, position: Int) {
         val currentHour = getItem(position)
-            currentHour.dt?.let {
-            holder.binding.txtHour.text = SimpleUtils.convertUnixTimeStamp(it.toLong(), timeZoneId).second
+        currentHour.dt?.let {
+            holder.binding.txtHour.text =
+                SimpleUtils.convertUnixTimeStamp(it.toLong(), timeZoneId).second
         }
         holder.binding.txtCellTemp.text = currentHour.temp.toString()
         holder.binding.imgCellIcon.setImageResource(
             SimpleUtils
-            .getIconResourceId(currentHour?.weather?.get(0)?.icon?:""))
+                .getIconResourceId(currentHour?.weather?.get(0)?.icon ?: "")
+        )
 
     }
 
-    fun setTimeZone(timeZoneId: String){
+    fun setTimeZone(timeZoneId: String) {
         this.timeZoneId = timeZoneId
     }
 
 }
 
-class HourlyViewHolder(var binding: HourlyCellBinding): RecyclerView.ViewHolder(binding.root)
+class HourlyViewHolder(var binding: HourlyCellBinding) : RecyclerView.ViewHolder(binding.root)
 
-class MyDiffUtil():  DiffUtil.ItemCallback<HourlyItem>() {
+class MyDiffUtil() : DiffUtil.ItemCallback<HourlyItem>() {
     override fun areItemsTheSame(oldItem: HourlyItem, newItem: HourlyItem): Boolean {
         return oldItem === newItem
     }

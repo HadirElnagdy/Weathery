@@ -71,8 +71,6 @@ class WeatherFragment : Fragment() {
 
     }
 
-
-
     private fun observeWeatherForecast(){
         lifecycleScope.launch {
             viewModel.forecast.collect { state ->

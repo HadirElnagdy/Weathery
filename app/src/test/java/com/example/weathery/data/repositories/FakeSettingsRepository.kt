@@ -7,28 +7,22 @@ class FakeSettingsRepository: SettingsRepository {
     private var language = "english"
     private var units = "metric"
     private var notification = false
-    override fun getLanguage(): String {
-        TODO("Not yet implemented")
-    }
+    override fun getLanguage() = language
 
     override fun setLanguage(language: String) {
-        TODO("Not yet implemented")
+        this.language = language
     }
 
-    override fun getUnits(): String {
-        TODO("Not yet implemented")
-    }
+    override fun getUnits() = units
 
     override fun setUnits(units: String) {
-        TODO("Not yet implemented")
+        this.units = units
     }
 
-    override fun isNotificationEnabled(): Boolean {
-        TODO("Not yet implemented")
-    }
+    override fun isNotificationEnabled(): Boolean = notification
 
     override fun setNotificationEnabled(enabled: Boolean) {
-        TODO("Not yet implemented")
+        this.notification = enabled
     }
 
     override fun getSettings(): Settings {
