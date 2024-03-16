@@ -1,5 +1,6 @@
 package com.example.weathery.main.favorites.view
 
+import android.content.DialogInterface
 import android.graphics.Canvas
 import android.location.Location
 import android.os.Bundle
@@ -15,11 +16,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weathery.R
 import com.example.weathery.data.database.FavLocationLocalDataSourceImpl
+import com.example.weathery.data.models.FavLocationsWeather
 import com.example.weathery.data.network.WeatherRemoteDataSourceImpl
 import com.example.weathery.databinding.FragmentFavoritesBinding
 import com.example.weathery.main.shared.WeatherViewModel
 import com.example.weathery.main.shared.WeatherViewModelFactory
 import com.example.weathery.data.repositories.WeatherRepositoryImpl
+import com.example.weathery.utils.CustomAlertDialog
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator
 
 
@@ -29,6 +32,7 @@ class FavoritesFragment : Fragment() {
     lateinit var viewModelFactory: WeatherViewModelFactory
     lateinit var viewModel: WeatherViewModel
     lateinit var favAdapter: FavoritesAdapter
+    lateinit var alertDialog: CustomAlertDialog
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,7 +44,7 @@ class FavoritesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        alertDialog = CustomAlertDialog(requireActivity())
         setupViewModel()
         viewModel.getAllFavs()
         setupRecyclerView()
@@ -57,14 +61,24 @@ class FavoritesFragment : Fragment() {
 
     private fun setupRecyclerView() {
         favAdapter = FavoritesAdapter(requireContext(),
-            { viewModel.delFromFav(it) }) {
-            val location = Location("fav")
-            location.longitude = it.forecast?.lon as Double
-            location.latitude = it.forecast?.lat as Double
-            val action = FavoritesFragmentDirections.actionFavoritesFragmentToWeatherFragment(location)
-            findNavController().navigate(action)
+            { showDeleteMessage(it) })
+        {navigateToFavDetails(it)}
+
+        val itemTouchHelper = ItemTouchHelper(getItemTouchHelper())
+        itemTouchHelper.attachToRecyclerView(binding.recyclerView)
+
+        viewModel.favList.observe(viewLifecycleOwner) { favList ->
+            favAdapter.submitList(favList)
+            binding.groupNoFav.visibility = if (favList.isEmpty()) View.VISIBLE else View.GONE
+        }
+        binding.recyclerView.apply {
+            layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
+            adapter = favAdapter
         }
 
+    }
+
+    private fun getItemTouchHelper() : ItemTouchHelper.SimpleCallback{
         val itemTouchHelperCallback = object : ItemTouchHelper.SimpleCallback(
             0, ItemTouchHelper.LEFT) {
             override fun onMove(
@@ -98,18 +112,26 @@ class FavoritesFragment : Fragment() {
                 super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
             }
         }
-        val itemTouchHelper = ItemTouchHelper(itemTouchHelperCallback)
-        itemTouchHelper.attachToRecyclerView(binding.recyclerView)
+        return itemTouchHelperCallback
+    }
+    private fun navigateToFavDetails(fav: FavLocationsWeather){
+        val location = Location("fav")
+        location.longitude = fav.forecast?.lon as Double
+        location.latitude = fav.forecast.lat as Double
+        viewModel.showFav = true
+        val action = FavoritesFragmentDirections.actionFavoritesFragmentToFavoritesDailtailsFragment(location)
+        findNavController().navigate(action)
+    }
 
-
-        viewModel.favList.observe(viewLifecycleOwner) { favList ->
-            favAdapter.submitList(favList)
-            binding.groupNoFav.visibility = if (favList.isEmpty()) View.VISIBLE else View.GONE
-        }
-        binding.recyclerView.apply {
-            layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
-            adapter = favAdapter
-        }
+    private fun showDeleteMessage(fav: FavLocationsWeather){
+        alertDialog.showCustomDialog(
+            getString(R.string.delete_item),
+            getString(R.string.sure_delete),
+            getString(R.string.delete),
+            getString(R.string.cancel),
+            { dialog, which -> viewModel.delFromFav(fav)},
+            { dialog, which -> },
+            { })
     }
 
     private fun setupFabClickListener() {

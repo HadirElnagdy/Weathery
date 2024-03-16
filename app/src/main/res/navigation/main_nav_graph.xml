@@ -25,8 +25,8 @@
             android:id="@+id/action_favoritesFragment_to_mapFragment"
             app:destination="@id/mapFragment" />
         <action
-            android:id="@+id/action_favoritesFragment_to_weatherFragment"
-            app:destination="@id/weatherFragment" />
+            android:id="@+id/action_favoritesFragment_to_favoritesDailtailsFragment"
+            app:destination="@id/favoritesDailtailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/alertsFragment"
@@ -54,5 +54,16 @@
         <action
             android:id="@+id/action_mapFragment_to_weatherFragment"
             app:destination="@id/weatherFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/favoritesDailtailsFragment"
+        android:name="com.example.weathery.main.favorites.view.FavoritesDetailsFragment"
+        android:label="fragment_favorites_dailtails"
+        tools:layout="@layout/fragment_favorites_details" >
+        <argument
+            android:name="location"
+            app:argType="android.location.Location"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
 </navigation>

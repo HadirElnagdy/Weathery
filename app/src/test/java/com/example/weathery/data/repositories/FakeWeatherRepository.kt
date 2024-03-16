@@ -9,7 +9,12 @@ class FakeWeatherRepository: WeatherRepository{
 
     var favoriteList: List<FavLocationsWeather> = mutableListOf()
 
-    override suspend fun getWeatherForecast(lon: Double, lat: Double): Flow<WeatherResponse> = flow{
+    override suspend fun getWeatherForecast(
+        lon: Double,
+        lat: Double,
+        lang: String?,
+        units: String?
+    ): Flow<WeatherResponse> = flow{
         emit(WeatherResponse(lon = lon, lat = lat))
     }
 

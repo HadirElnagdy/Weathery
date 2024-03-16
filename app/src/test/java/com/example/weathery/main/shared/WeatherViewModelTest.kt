@@ -36,7 +36,6 @@ class WeatherViewModelTest {
     fun getAllFavs_location_returnsWeatherResponseWithSameLocation() = runBlockingTest{
 
 
-
     }
 
 

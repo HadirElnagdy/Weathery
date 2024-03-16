@@ -1,13 +1,13 @@
-package com.example.weathery.main.weather.view
+package com.example.weathery.main.favorites.view
 
 import android.annotation.SuppressLint
 import android.location.Location
 import android.os.Bundle
 import android.util.Log
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
 import androidx.lifecycle.lifecycleScope
@@ -15,26 +15,29 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weathery.R
 import com.example.weathery.data.database.FavLocationLocalDataSourceImpl
-import com.example.weathery.databinding.FragmentWeatherBinding
-import com.example.weathery.main.shared.WeatherViewModel
-import com.example.weathery.main.shared.WeatherViewModelFactory
-import com.example.weathery.data.repositories.WeatherRepositoryImpl
-import com.example.weathery.utils.ApiState
-import com.example.weathery.utils.NetworkUtils
 import com.example.weathery.data.models.WeatherResponse
 import com.example.weathery.data.network.WeatherRemoteDataSourceImpl
 import com.example.weathery.data.repositories.SettingsRepositoryImpl
+import com.example.weathery.data.repositories.WeatherRepositoryImpl
 import com.example.weathery.data.sharedpreferences.SettingsLocalDataSourceImpl
+import com.example.weathery.databinding.FragmentFavoritesDetailsBinding
+import com.example.weathery.databinding.FragmentWeatherBinding
 import com.example.weathery.main.shared.SettingsViewModel
 import com.example.weathery.main.shared.SettingsViewModelFactory
-import com.example.weathery.utils.Constants.Companion.UNITS_STANDARD_KEY
+import com.example.weathery.main.shared.WeatherViewModel
+import com.example.weathery.main.shared.WeatherViewModelFactory
+import com.example.weathery.main.weather.view.DailyRecyclerViewAdapter
+import com.example.weathery.main.weather.view.HourlyRecyclerViewAdapter
+import com.example.weathery.utils.ApiState
+import com.example.weathery.utils.Constants
+import com.example.weathery.utils.NetworkUtils
 import com.example.weathery.utils.SimpleUtils
 import kotlinx.coroutines.launch
 
 
-class WeatherFragment : Fragment() {
+class FavoritesDetailsFragment : Fragment() {
 
-    private lateinit var binding: FragmentWeatherBinding
+    private lateinit var binding: FragmentFavoritesDetailsBinding
     private lateinit var viewModelFactory: WeatherViewModelFactory
     private lateinit var viewModel: WeatherViewModel
     private lateinit var settingsViewModelFactory: SettingsViewModelFactory
@@ -42,6 +45,7 @@ class WeatherFragment : Fragment() {
     private lateinit var hourlyAdapter: HourlyRecyclerViewAdapter
     private lateinit var dailyAdapter: DailyRecyclerViewAdapter
     private lateinit var response: WeatherResponse
+    private lateinit var location: Location
     private val tag = "WeatherFragment"
 
 
@@ -55,7 +59,7 @@ class WeatherFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        binding = FragmentWeatherBinding.inflate(inflater, container, false)
+        binding = FragmentFavoritesDetailsBinding.inflate(inflater, container, false)
         setupViewModel()
         getForecast()
         return (binding.root)
@@ -75,7 +79,7 @@ class WeatherFragment : Fragment() {
 
     private fun observeWeatherForecast(){
         lifecycleScope.launch {
-            viewModel.forecast.collect { state ->
+            viewModel.favForecast.collect { state ->
                 when (state) {
                     is ApiState.Loading -> showLoadingState()
                     is ApiState.Success -> updateUI(state.data)
@@ -86,44 +90,46 @@ class WeatherFragment : Fragment() {
     }
 
     private fun showErrorState(msg: String){
-        binding.progressBar.visibility = View.INVISIBLE
-        binding.scrollView3.visibility = View.INVISIBLE
+        binding.progressBar2.visibility = View.INVISIBLE
+        binding.scrollView4.visibility = View.INVISIBLE
         Log.i(tag, "setUpUI: ${msg}")
-        //if msg == can't find api update the ui with the existing room weather
     }
 
     private fun showLoadingState(){
-        binding.progressBar.visibility = View.VISIBLE
-        binding.scrollView3.visibility = View.INVISIBLE
+        binding.progressBar2.visibility = View.VISIBLE
+        binding.scrollView4.visibility = View.INVISIBLE
     }
     @SuppressLint("SetTextI18n")
     private fun updateUI(data: WeatherResponse){
         response = data
         val current = data.current?.weather?.get(0)
         Log.i(tag, "updateUI: $data")
-        binding.progressBar.visibility = View.INVISIBLE
-        binding.scrollView3.visibility = View.VISIBLE
-        binding.txtCityName.text = viewModel.getAdminArea(viewModel.homeLocation)
-        binding.txtTemp.text = "${data.current?.temp}\u00B0"
-        binding.txtWeatherDesc.text = "${current?.main}"
-        binding.imgIcon.setImageResource(SimpleUtils.getIconResourceId(current?.icon?:""))
+        binding.progressBar2.visibility = View.INVISIBLE
+        binding.scrollView4.visibility = View.VISIBLE
+        binding.txtFavCity.text = viewModel.getAdminArea(location)
+        binding.txtFavTemp.text = "${data.current?.temp}\u00B0"
+        binding.txtFavDesc.text = "${current?.main}"
+        binding.imgFavIcon.setImageResource(SimpleUtils.getIconResourceId(current?.icon?:""))
         var dateTime = SimpleUtils.convertUnixTimeStamp(data.current?.dt?.toLong(),
             data.timezone)
-        binding.txtTime.text = "${getString(R.string.last_update)}: ${dateTime.first} ${dateTime.second}"
-        binding.txtHumidity.text = data.current?.humidity?.toString()
-        binding.txtPressure.text = data.current?.pressure?.toString()
-        binding.txtVisibility.text = data.current?.visibility?.toString()
-        binding.txtWindSpeed.text = data.current?.windSpeed?.toString()
-        Log.i(tag, "updateUI: ${data.current?.windSpeed?.toString()}")
+        binding.txtFavTime.text = "${getString(R.string.last_update)}: ${dateTime.first} ${dateTime.second}"
+        binding.txtFavHumidity.text = data.current?.humidity?.toString()
+        binding.txtFavPressure.text = data.current?.pressure?.toString()
+        binding.txtFavVisibility.text = data.current?.visibility?.toString()
+        binding.txtWindSpeedFav.text = data.current?.windSpeed?.toString()
         setupRecyclerViews(data.timezone!!)
     }
 
     private fun setupViewModel(){
         viewModelFactory = WeatherViewModelFactory(requireActivity().application,
-            WeatherRepositoryImpl.getInstance(FavLocationLocalDataSourceImpl.getInstance(requireContext()),
-                WeatherRemoteDataSourceImpl))
-        viewModel = ViewModelProvider(activity as ViewModelStoreOwner, viewModelFactory).get(WeatherViewModel::class.java)
-        settingsViewModelFactory = SettingsViewModelFactory(SettingsRepositoryImpl
+            WeatherRepositoryImpl.getInstance(
+                FavLocationLocalDataSourceImpl.getInstance(requireContext()),
+                WeatherRemoteDataSourceImpl
+            ))
+        viewModel = ViewModelProvider(activity as ViewModelStoreOwner, viewModelFactory).get(
+            WeatherViewModel::class.java)
+        settingsViewModelFactory = SettingsViewModelFactory(
+            SettingsRepositoryImpl
             .getInstance(SettingsLocalDataSourceImpl.getInstance(requireContext())))
         settingsViewModel = ViewModelProvider(activity as ViewModelStoreOwner, settingsViewModelFactory)
             .get(SettingsViewModel::class.java)
@@ -133,7 +139,7 @@ class WeatherFragment : Fragment() {
         hourlyAdapter = HourlyRecyclerViewAdapter(requireContext())
         hourlyAdapter.setTimeZone(timeZone)
         hourlyAdapter.submitList(response.hourly)
-        binding.recyclerViewHourly.apply {
+        binding.recyclerViewHourlyFav.apply {
             val linearLayout = LinearLayoutManager(context)
             linearLayout.orientation = RecyclerView.HORIZONTAL
             layoutManager = linearLayout
@@ -141,7 +147,7 @@ class WeatherFragment : Fragment() {
         }
         dailyAdapter = DailyRecyclerViewAdapter(requireContext()){ }
         dailyAdapter.submitList(response.daily)
-        binding.recyclerViewDaily.apply {
+        binding.recyclerViewDailyFav.apply {
             val linearLayout = LinearLayoutManager(context)
             linearLayout.orientation = RecyclerView.VERTICAL
             layoutManager = linearLayout
@@ -150,10 +156,10 @@ class WeatherFragment : Fragment() {
     }
 
     private fun getForecast(){
-        val units = if(settingsViewModel.getUnits() == UNITS_STANDARD_KEY) null else settingsViewModel.getUnits()
-        viewModel.getForecast(location = viewModel.homeLocation,
+        location = FavoritesDetailsFragmentArgs.fromBundle(requireArguments()).location!!
+        val units = if(settingsViewModel.getUnits() == Constants.UNITS_STANDARD_KEY) null else settingsViewModel.getUnits()
+        viewModel.getFavForecast(location = location,
             language = settingsViewModel.getLanguage(),
             units = units)
     }
-
 }

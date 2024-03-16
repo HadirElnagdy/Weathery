@@ -3,12 +3,13 @@ package com.example.weathery.main.shared
 import android.app.Application
 import android.location.Geocoder
 import android.location.Location
-import android.util.Log
+import androidx.core.content.ContextCompat.getString
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import com.example.weathery.R
 import com.example.weathery.data.models.FavLocationsWeather
 import com.example.weathery.data.repositories.WeatherRepository
 import com.example.weathery.utils.ApiState
@@ -26,17 +27,21 @@ class WeatherViewModel(private val app: Application, private val repository: Wea
     private var _mutableForecast = MutableStateFlow<ApiState>(ApiState.Loading)
     val forecast = _mutableForecast.asStateFlow()
 
+    private var _mutableFavForecast = MutableStateFlow<ApiState>(ApiState.Loading)
+    val favForecast = _mutableFavForecast.asStateFlow()
+
     private var _mutableFavList = MutableLiveData<List<FavLocationsWeather>>()
     val favList: LiveData<List<FavLocationsWeather>> = _mutableFavList
 
-    var location: Location? = null
-    private val TAG = "SharedViewModel"
+    var homeLocation: Location? = null
+    var showFav = false
 
     fun getAllFavs() = viewModelScope.launch(Dispatchers.IO) {
         repository.getAllFavorites().collectLatest{
             _mutableFavList.postValue(it)
         }
     }
+
 
     fun addToFav(location: Location) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -54,11 +59,11 @@ class WeatherViewModel(private val app: Application, private val repository: Wea
         }
     }
 
-    fun getForecast(location: Location?) = viewModelScope.launch(Dispatchers.IO) {
-        Log.i(TAG, "getForecast: ${location.toString()}")
-        this@WeatherViewModel.location = location
+    fun getForecast(location: Location?,
+                    language: String? = null,
+                    units: String? = null) = viewModelScope.launch(Dispatchers.IO) {
         location?.let {
-            repository.getWeatherForecast(it.longitude, it.latitude)
+            repository.getWeatherForecast(it.longitude, it.latitude, lang = language, units = units)
                 .catch {
                     _mutableForecast.value = ApiState.Failure(it)
                 }
@@ -68,6 +73,21 @@ class WeatherViewModel(private val app: Application, private val repository: Wea
         }
     }
 
+    fun getFavForecast(location: Location?,
+                       language: String? = null,
+                       units: String? = null) = viewModelScope.launch(Dispatchers.IO) {
+        location?.let {
+            repository.getWeatherForecast(it.longitude, it.latitude, lang = language, units = units)
+                .catch {
+                    _mutableFavForecast.value = ApiState.Failure(it)
+                }
+                .collect {
+                    _mutableFavForecast.value = ApiState.Success(it)
+                }
+        }
+
+    }
+
     fun getAdminArea(location: Location?): String {
         val geocoder = Geocoder(app/*, Locale("ar")*/)
         return try {
@@ -75,11 +95,9 @@ class WeatherViewModel(private val app: Application, private val repository: Wea
             val adminArea = list?.getOrNull(0)?.adminArea
             val addressLine = list?.getOrNull(0)?.getAddressLine(0)
             val countryName = list?.getOrNull(0)?.countryName
-            Log.i(TAG, "getCityName: adminArea: $adminArea lon: ${location?.longitude} lat: ${location?.latitude}")
-            adminArea ?: "Unknown"
+            adminArea ?: getString(app, R.string.unknown)
         } catch (e: IOException) {
-            Log.e(TAG, "Error getting city name: ${e.message}")
-            "Unknown"
+            getString(app, R.string.unknown)
         }
     }
 

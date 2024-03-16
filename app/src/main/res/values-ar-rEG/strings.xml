@@ -30,4 +30,11 @@
         <string name="low">أدنى: </string>
         <string name="high">أعلى: </string>
         <string name="today">اليوم</string>
+        <string name="delete_item">حذف العنصر</string>
+        <string name="sure_delete">هل أنت متأكد أنك تريد حذف هذا العنصر؟</string>
+        <string name="delete">حذف</string>
+        <string name="cancel">إلغاء</string>
+        <string name="unknown">مجهول</string>
+        <string name="changes_saved">تم حفظ التغييرات</string>
+
 </resources>

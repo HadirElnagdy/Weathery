@@ -19,7 +19,7 @@ data class Current(
     val sunrise: Int? = null,
     val temp: Any? = "--",
     val visibility: Int? = null,
-    val uvi: Any? = null,
+    val uvi: Any? = null, //we can use this as an ID
     val pressure: Int? = null,
     val clouds: Int? = null,
     val feelsLike: Any? = null,

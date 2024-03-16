@@ -12,6 +12,7 @@ class Constants {
         const val LANG_ARABIC_KEY = "ar"
         const val UNITS_IMPERIAL_KEY = "imperial"
         const val UNITS_METRIC_KEY = "metric"
+        const val UNITS_STANDARD_KEY = "standard"
         const val KEY_LANGUAGE = "language"
         const val KEY_UNITS = "units"
         const val KEY_NOTIFICATION_ENABLED = "notification_enabled"

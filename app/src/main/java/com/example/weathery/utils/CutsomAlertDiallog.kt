@@ -10,6 +10,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class CustomAlertDialog(private val context: Context) {
 
+
     private val builder = AlertDialog.Builder(context)
     private var alertDialog: AlertDialog? = null
 

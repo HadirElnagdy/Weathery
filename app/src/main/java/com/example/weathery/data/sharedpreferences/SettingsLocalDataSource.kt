@@ -2,9 +2,8 @@ package com.example.weathery.data.sharedpreferences
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.example.weathery.data.database.FavLocationLocalDataSourceImpl
 import com.example.weathery.data.models.Settings
-import com.example.weathery.utils.Constants
-import com.example.weathery.utils.Constants.Companion
 import com.example.weathery.utils.Constants.Companion.KEY_LANGUAGE
 import com.example.weathery.utils.Constants.Companion.KEY_NOTIFICATION_ENABLED
 import com.example.weathery.utils.Constants.Companion.KEY_UNITS
@@ -21,12 +20,22 @@ interface SettingsLocalDataSource {
 }
 
 
-class SettingsLocalDataSourceImpl(context: Context) : SettingsLocalDataSource {
+class SettingsLocalDataSourceImpl private constructor(context: Context) : SettingsLocalDataSource {
 
     private val sharedPreferences: SharedPreferences = context.getSharedPreferences(
         "settings_pref",
         Context.MODE_PRIVATE
     )
+    companion object{
+        private var instance: SettingsLocalDataSourceImpl? = null
+        fun getInstance (context: Context): SettingsLocalDataSourceImpl {
+            return instance ?: synchronized(this){
+                val temp = SettingsLocalDataSourceImpl(context)
+                instance = temp
+                temp
+            }
+        }
+    }
 
     private val DEFAULT_LANGUAGE = "en"
     private val DEFAULT_UNITS = "metric"
