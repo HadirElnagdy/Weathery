@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav_graph"
+    app:startDestination="@id/weatherFragment">
+
+    <fragment
+        android:id="@+id/weatherFragment"
+        android:name="com.example.weathery.main.weather.view.WeatherFragment"
+        android:label="@string/home"
+        tools:layout="@layout/fragment_weather" >
+        <argument
+            android:name="locationFav"
+            app:argType="android.location.Location"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
+    <fragment
+        android:id="@+id/favoritesFragment"
+        android:name="com.example.weathery.main.favorites.view.FavoritesFragment"
+        android:label="@string/fav"
+        tools:layout="@layout/fragment_favorites" >
+        <action
+            android:id="@+id/action_favoritesFragment_to_mapFragment"
+            app:destination="@id/mapFragment" />
+        <action
+            android:id="@+id/action_favoritesFragment_to_favoritesDailtailsFragment"
+            app:destination="@id/favoritesDailtailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/alertsFragment"
+        android:name="com.example.weathery.main.alert.view.AlertsFragment"
+        android:label="@string/alert"
+        tools:layout="@layout/fragment_alerts" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.weathery.main.settings.view.SettingsFragment"
+        android:label="@string/settings"
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_settingsFragment_to_mapFragment"
+            app:destination="@id/mapFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mapFragment"
+        android:name="com.example.weathery.main.map.MapFragment"
+        android:label="fragment_map"
+        tools:layout="@layout/fragment_map" >
+        <argument
+            android:name="fromFav"
+            app:argType="boolean"
+            android:defaultValue="true" />
+        <action
+            android:id="@+id/action_mapFragment_to_weatherFragment"
+            app:destination="@id/weatherFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/favoritesDailtailsFragment"
+        android:name="com.example.weathery.main.favorites.view.FavoritesDetailsFragment"
+        android:label="fragment_favorites_dailtails"
+        tools:layout="@layout/fragment_favorites_details" >
+        <argument
+            android:name="location"
+            app:argType="android.location.Location"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
+</navigation>

@@ -2,6 +2,11 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="my_light_primary">#E9DBFF</color>
-    <color name="my_dark_primary">#222350</color>
+    <color name="my_primary_color">#2A2F4F</color>
+    <color name="my_secondary_color">#404365</color>
+    <color name="purple">#917FB3</color>
+    <color name="my_accent_color">#F4D6FA</color>
+    <color name="transparent">#00000000</color>
+    <color name="red">#ED5E68</color>
+
 </resources>

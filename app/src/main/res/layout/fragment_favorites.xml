@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/my_primary_color"
+    tools:context=".main.favorites.view.FavoritesFragment">
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group_no_fav"
+        android:layout_width="138dp"
+        android:layout_height="119dp"
+        app:constraint_referenced_ids="lottie_fav, txtNoFav" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottie_fav"
+        android:layout_width="154dp"
+        android:layout_height="166dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.375"
+        app:lottie_autoPlay="true"
+        app:lottie_rawRes="@raw/nofav_animation"
+        app:lottie_loop="true" />
+
+    <TextView
+        android:id="@+id/txtNoFav"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/no_favorites_yet"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="@+id/lottie_fav"
+        app:layout_constraintStart_toStartOf="@+id/lottie_fav"
+        app:layout_constraintTop_toBottomOf="@+id/lottie_fav" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_add_fav"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="64dp"
+        android:clickable="true"
+        android:src="@drawable/ic_add_fav"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:elevation="16dp"
+        />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
