@@ -6,7 +6,7 @@ import com.example.weathery.data.sharedpreferences.SettingsLocalDataSource
 import kotlinx.coroutines.flow.Flow
 
 interface AlertsRepository {
-    suspend fun insertAlert(alert: Alert)
+    suspend fun insertAlert(alert: Alert): Long
     suspend fun deleteAlert(alert: Alert)
     fun getListOfAlerts(): Flow<List<Alert>>
     fun getAlertWithId(id: Long): Alert

@@ -1,4 +1,4 @@
-package com.example.weathery.utils
+package com.example.weathery.data.utils
 
 import android.location.Location
 import com.example.weathery.data.models.WeatherResponse

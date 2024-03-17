@@ -22,13 +22,13 @@ import com.example.weathery.main.shared.SettingsViewModel
 import com.example.weathery.main.shared.SettingsViewModelFactory
 import com.example.weathery.main.shared.WeatherViewModel
 import com.example.weathery.main.shared.WeatherViewModelFactory
-import com.example.weathery.utils.Constants
-import com.example.weathery.utils.Constants.Companion.LANG_ARABIC_KEY
-import com.example.weathery.utils.Constants.Companion.LANG_ENGLISH_KEY
-import com.example.weathery.utils.Constants.Companion.UNITS_IMPERIAL_KEY
-import com.example.weathery.utils.Constants.Companion.UNITS_METRIC_KEY
-import com.example.weathery.utils.Constants.Companion.UNITS_STANDARD_KEY
-import com.example.weathery.utils.LocaleHelper
+import com.example.weathery.data.utils.Constants
+import com.example.weathery.data.utils.Constants.Companion.LANG_ARABIC_KEY
+import com.example.weathery.data.utils.Constants.Companion.LANG_ENGLISH_KEY
+import com.example.weathery.data.utils.Constants.Companion.UNITS_IMPERIAL_KEY
+import com.example.weathery.data.utils.Constants.Companion.UNITS_METRIC_KEY
+import com.example.weathery.data.utils.Constants.Companion.UNITS_STANDARD_KEY
+import com.example.weathery.data.utils.LocaleHelper
 
 class SettingsFragment : Fragment() {
 

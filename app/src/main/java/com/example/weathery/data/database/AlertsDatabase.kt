@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.example.weathery.data.models.Alert
 import com.example.weathery.data.models.FavLocationsWeather
-import com.example.weathery.utils.WeatherResponseConverter
+import com.example.weathery.data.utils.WeatherResponseConverter
 
 @Database(entities = arrayOf(Alert::class), version = 1 )
 abstract class AlertsDatabase: RoomDatabase() {

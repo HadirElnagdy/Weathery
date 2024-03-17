@@ -13,7 +13,7 @@ import com.bumptech.glide.Glide
 import com.example.weathery.R
 import com.example.weathery.databinding.DailyCellBinding
 import com.example.weathery.data.models.DailyItem
-import com.example.weathery.utils.SimpleUtils
+import com.example.weathery.data.utils.SimpleUtils
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
@@ -35,7 +35,8 @@ class DailyRecyclerViewAdapter(var context: Context, var onClick: (DailyItem) ->
     @SuppressLint("SetTextI18n", "SimpleDateFormat")
     override fun onBindViewHolder(holder: DailyViewHolder, position: Int) {
         val currentItem = currentList.get(position)
-        holder.binding.imgDailyIcon.setImageResource(SimpleUtils
+        holder.binding.imgDailyIcon.setImageResource(
+            SimpleUtils
             .getIconResourceId(currentItem?.weather?.get(0)?.icon?:""))
         currentItem.dt?.let {
             val date = Date(it.toLong() * 1000)

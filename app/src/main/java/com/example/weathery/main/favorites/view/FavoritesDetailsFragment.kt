@@ -27,10 +27,10 @@ import com.example.weathery.main.shared.WeatherViewModel
 import com.example.weathery.main.shared.WeatherViewModelFactory
 import com.example.weathery.main.weather.view.DailyRecyclerViewAdapter
 import com.example.weathery.main.weather.view.HourlyRecyclerViewAdapter
-import com.example.weathery.utils.ApiState
-import com.example.weathery.utils.Constants
-import com.example.weathery.utils.NetworkUtils
-import com.example.weathery.utils.SimpleUtils
+import com.example.weathery.data.utils.ApiState
+import com.example.weathery.data.utils.Constants
+import com.example.weathery.data.utils.NetworkUtils
+import com.example.weathery.data.utils.SimpleUtils
 import kotlinx.coroutines.launch
 
 
@@ -112,7 +112,7 @@ class FavoritesDetailsFragment : Fragment() {
         var dateTime = SimpleUtils.convertUnixTimeStamp(data.current?.dt?.toLong(),
             data.timezone)
         binding.txtFavTime.text = "${getString(R.string.last_update)}: ${dateTime.first} ${dateTime.second}"
-        binding.txtFavHumidity.text = data.current?.humidity?.toString()
+        binding.txtFavHumidity.text = "${data.current?.humidity?.toString()}%"
         binding.txtFavPressure.text = data.current?.pressure?.toString()
         binding.txtFavVisibility.text = data.current?.visibility?.toString()
         binding.txtWindSpeedFav.text = data.current?.wind_speed?.toString()

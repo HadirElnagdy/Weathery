@@ -4,4 +4,29 @@
         parent="Base.Widget.AppCompat.CompoundButton.RadioButton">
         <item name="android:textColor">@color/white</item>
     </style>
+
+    <style name="DatePickerTheme" parent="ThemeOverlay.MaterialComponents.Dialog">
+        <!-- Customize the background color -->
+        <item name="android:background">@color/my_primary_color</item>
+        <!-- Customize the text color -->
+        <item name="android:textColorPrimary">@color/white</item>
+        <!-- Customize the accent color -->
+        <item name="colorAccent">@color/my_accent_color</item>
+        <!-- Customize the selected date background color -->
+        <item name="android:datePickerDialogTheme">@style/DatePickerDialogTheme</item>
+    </style>
+
+    <style name="DatePickerDialogTheme" parent="ThemeOverlay.MaterialComponents.Dialog">
+        <!-- Customize the selected date background color -->
+        <item name="android:datePickerStyle">@style/CustomDatePickerStyle</item>
+    </style>
+
+    <style name="CustomDatePickerStyle" parent="@android:style/Widget.Material.Light.DatePicker">
+        <!-- Customize the selected date text color -->
+        <item name="android:textColorPrimary">@color/white</item>
+        <!-- Customize the selected date background color -->
+        <item name="android:calendarTextColor">@color/white</item>
+        <!-- Customize the header background color -->
+        <item name="android:headerBackground">@color/my_primary_color</item>
+    </style>
 </resources>

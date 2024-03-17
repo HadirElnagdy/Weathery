@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.example.weathery.data.models.FavLocationsWeather
-import com.example.weathery.utils.WeatherResponseConverter
+import com.example.weathery.data.utils.WeatherResponseConverter
 
 @Database(entities = arrayOf(FavLocationsWeather::class), version = 1 )
 @TypeConverters(WeatherResponseConverter::class)

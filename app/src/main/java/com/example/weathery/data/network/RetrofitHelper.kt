@@ -1,6 +1,6 @@
 package com.example.weathery.data.network
 
-import com.example.weathery.utils.Constants
+import com.example.weathery.data.utils.Constants
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 

@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.weathery.R
 import com.example.weathery.databinding.FavCellBinding
 import com.example.weathery.data.models.FavLocationsWeather
-import com.example.weathery.utils.SimpleUtils
+import com.example.weathery.data.utils.SimpleUtils
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator
 
 

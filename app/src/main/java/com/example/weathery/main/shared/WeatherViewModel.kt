@@ -12,7 +12,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.weathery.R
 import com.example.weathery.data.models.FavLocationsWeather
 import com.example.weathery.data.repositories.WeatherRepository
-import com.example.weathery.utils.ApiState
+import com.example.weathery.data.utils.ApiState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

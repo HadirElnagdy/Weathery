@@ -1,4 +1,4 @@
-package com.example.weathery.utils
+package com.example.weathery.data.utils
 
 import androidx.room.TypeConverter
 import com.example.weathery.data.models.WeatherResponse

@@ -9,7 +9,8 @@ data class WeatherResponse (
     val lon: Any? = null,
     val hourly: List<HourlyItem?>? = null,
     val minutely: List<MinutelyItem?>? = null,
-    val lat: Any? = null
+    val lat: Any? = null,
+    val alert: AlertResponse? = null
 )
 
 data class Current(
@@ -97,4 +98,14 @@ data class DailyItem(
     val humidity: Int? = null,
     val windSpeed: Double? = null
 )
+
+data class AlertResponse(
+    val sender_name: String,
+    val event: String,
+    val start: Long,
+    val end: Long,
+    val description: String,
+    val tags: List<String>
+)
+
 

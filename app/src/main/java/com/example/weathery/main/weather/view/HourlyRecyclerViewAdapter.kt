@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.weathery.databinding.HourlyCellBinding
 import com.example.weathery.data.models.HourlyItem
-import com.example.weathery.utils.SimpleUtils
+import com.example.weathery.data.utils.SimpleUtils
 import java.text.SimpleDateFormat
 import java.util.*
 

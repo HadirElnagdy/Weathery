@@ -21,7 +21,7 @@ import com.example.weathery.databinding.FragmentFavoritesBinding
 import com.example.weathery.main.shared.WeatherViewModel
 import com.example.weathery.main.shared.WeatherViewModelFactory
 import com.example.weathery.data.repositories.WeatherRepositoryImpl
-import com.example.weathery.utils.CustomAlertDialog
+import com.example.weathery.data.utils.CustomAlertDialog
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator
 
 
@@ -129,8 +129,8 @@ class FavoritesFragment : Fragment() {
             getString(R.string.delete),
             getString(R.string.cancel),
             { dialog, which -> viewModel.delFromFav(fav)},
-            { dialog, which -> },
-            { })
+            { dialog, which -> }
+        ) { }
     }
 
     private fun setupFabClickListener() {

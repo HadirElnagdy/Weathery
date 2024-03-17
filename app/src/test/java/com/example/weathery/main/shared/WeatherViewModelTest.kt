@@ -9,7 +9,7 @@ import com.example.weathery.data.models.FavLocationsWeather
 import com.example.weathery.data.models.WeatherResponse
 import com.example.weathery.data.repositories.FakeWeatherRepository
 import com.example.weathery.data.repositories.WeatherRepository
-import com.example.weathery.utils.ApiState
+import com.example.weathery.data.utils.ApiState
 import getOrAwaitValue
 import kotlinx.coroutines.test.runBlockingTest
 import org.hamcrest.CoreMatchers

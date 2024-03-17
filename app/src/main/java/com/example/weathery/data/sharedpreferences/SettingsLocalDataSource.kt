@@ -4,9 +4,9 @@ import android.content.Context
 import android.content.SharedPreferences
 import com.example.weathery.data.database.FavLocationLocalDataSourceImpl
 import com.example.weathery.data.models.Settings
-import com.example.weathery.utils.Constants.Companion.KEY_LANGUAGE
-import com.example.weathery.utils.Constants.Companion.KEY_NOTIFICATION_ENABLED
-import com.example.weathery.utils.Constants.Companion.KEY_UNITS
+import com.example.weathery.data.utils.Constants.Companion.KEY_LANGUAGE
+import com.example.weathery.data.utils.Constants.Companion.KEY_NOTIFICATION_ENABLED
+import com.example.weathery.data.utils.Constants.Companion.KEY_UNITS
 
 interface SettingsLocalDataSource {
     fun getLanguage(): String

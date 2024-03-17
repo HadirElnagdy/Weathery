@@ -1,4 +1,4 @@
-package com.example.weathery.utils
+package com.example.weathery.data.utils
 
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey

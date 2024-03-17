@@ -1,11 +1,8 @@
-package com.example.weathery.utils
+package com.example.weathery.data.utils
 
 import android.content.Context
 import android.content.DialogInterface
-import android.content.Intent
-import android.view.View
 import androidx.appcompat.app.AlertDialog
-import androidx.navigation.Navigation
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class CustomAlertDialog(private val context: Context) {
@@ -19,7 +16,7 @@ class CustomAlertDialog(private val context: Context) {
         message: String,
         positiveButtonText: String,
         negativeButtonText: String,
-        positiveClickListener: DialogInterface.OnClickListener,
+        positiveClickListener: (Any?, Any?) -> Unit,
         negativeClickListener: DialogInterface.OnClickListener,
         dismissListener: DialogInterface.OnDismissListener
     ) {
@@ -29,6 +26,7 @@ class CustomAlertDialog(private val context: Context) {
             .setPositiveButton(positiveButtonText, positiveClickListener)
             .setNegativeButton(negativeButtonText, negativeClickListener)
             .setOnDismissListener(dismissListener)
+            .setCancelable(false)
             .show()
     }
 

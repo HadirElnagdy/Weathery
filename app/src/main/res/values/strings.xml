@@ -36,6 +36,16 @@
     <string name="cancel">Cancel</string>
     <string name="unknown">Unknown</string>
     <string name="changes_saved">Changes have been saved</string>
+    <string name="dismiss">Dismiss</string>
+    <string name="save">Save</string>
+    <string name="enddate">End Date</string>
+    <string name="endtime">End Time</string>
+    <string name="starttime">Start Time</string>
+    <string name="warning">Warning</string>
+    <string name="permission_not_granted">Permissions not granted!</string>
+    <string name="permission_request">Permission request</string>
+    <string name="alarm_permission">Allow the app to display alarms over other apps?</string>
+    <string name="allow">Allow</string>
 
 
 </resources>

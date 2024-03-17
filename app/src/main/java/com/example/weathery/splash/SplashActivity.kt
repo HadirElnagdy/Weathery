@@ -16,8 +16,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.weathery.R
 import com.example.weathery.main.shared.MainActivity
-import com.example.weathery.utils.Constants
-import com.example.weathery.utils.LocationState
+import com.example.weathery.data.utils.Constants
+import com.example.weathery.data.utils.LocationState
 import com.google.android.gms.location.LocationServices
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch

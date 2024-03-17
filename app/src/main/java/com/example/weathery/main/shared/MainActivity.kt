@@ -17,7 +17,7 @@ import com.example.weathery.data.database.FavLocationLocalDataSourceImpl
 import com.example.weathery.data.network.WeatherRemoteDataSourceImpl
 import com.example.weathery.databinding.ActivityMainBinding
 import com.example.weathery.data.repositories.WeatherRepositoryImpl
-import com.example.weathery.utils.NetworkUtils
+import com.example.weathery.data.utils.NetworkUtils
 
 
 class MainActivity : AppCompatActivity() {

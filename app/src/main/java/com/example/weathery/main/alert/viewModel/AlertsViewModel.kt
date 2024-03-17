@@ -10,6 +10,7 @@ import com.example.weathery.data.repositories.AlertsRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import java.lang.IllegalArgumentException
 
 class AlertsViewModel(private val repo: AlertsRepository) : ViewModel(){
@@ -17,9 +18,10 @@ class AlertsViewModel(private val repo: AlertsRepository) : ViewModel(){
     private var _mutableAlertsList = MutableLiveData<List<Alert>>()
     val alertsList: LiveData<List<Alert>> = _mutableAlertsList
 
-    fun insertAlert(alert: Alert) {
-        viewModelScope.launch(Dispatchers.IO) {
-           repo.insertAlert(alert)
+
+    fun insertAlert(alert: Alert) : Long{
+        return runBlocking {
+            repo.insertAlert(alert)
         }
     }
 

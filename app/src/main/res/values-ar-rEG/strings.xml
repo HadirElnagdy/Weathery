@@ -36,5 +36,14 @@
         <string name="cancel">إلغاء</string>
         <string name="unknown">مجهول</string>
         <string name="changes_saved">تم حفظ التغييرات</string>
-
+        <string name="dismiss">إيقاف</string>
+        <string name="save">حفظ</string>
+        <string name="enddate">تاريخ الانتهاء</string>
+        <string name="endtime">موعد النهاية</string>
+        <string name="starttime">موعد البداية</string>
+        <string name="warning">تنبيه</string>
+        <string name="permission_not_granted">الأذونات غير متوفرة</string>
+        <string name="permission_request">طلب للسماح</string>
+        <string name="alarm_permission">السماح للتطبيق بعرض التنبيهات؟</string>
+        <string name="allow">السماح</string>
 </resources>

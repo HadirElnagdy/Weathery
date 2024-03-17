@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.weathery.R
 import com.example.weathery.data.models.Alert
 import com.example.weathery.databinding.AlertCellBinding
 
@@ -26,10 +27,9 @@ class AlertsAdapter(
 
     override fun onBindViewHolder(holder: AlertViewHolder, position: Int) {
         val currentItem = getItem(position)
-//        holder.binding.imgAlertType.setImageResource(R.drawable.)
+        holder.binding.imgAlertType.setImageResource(R.drawable.ic_alarm)
         holder.binding.txtAlertTime.text = currentItem.endTime
         holder.binding.txtAlertType.text = currentItem.alertType
-
     }
 
 

@@ -13,7 +13,7 @@ interface AlertsDao {
     @Query("select * from alerts_table")
     fun getListOfAlerts(): Flow<List<Alert>>
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAlert(alert: Alert)
+    suspend fun insertAlert(alert: Alert): Long
     @Delete
     suspend fun deleteAlert(alert: Alert)
     @Query("select * from alerts_table where id = :id")

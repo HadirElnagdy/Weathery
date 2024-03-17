@@ -18,16 +18,16 @@ import com.example.weathery.databinding.FragmentWeatherBinding
 import com.example.weathery.main.shared.WeatherViewModel
 import com.example.weathery.main.shared.WeatherViewModelFactory
 import com.example.weathery.data.repositories.WeatherRepositoryImpl
-import com.example.weathery.utils.ApiState
-import com.example.weathery.utils.NetworkUtils
+import com.example.weathery.data.utils.ApiState
+import com.example.weathery.data.utils.NetworkUtils
 import com.example.weathery.data.models.WeatherResponse
 import com.example.weathery.data.network.WeatherRemoteDataSourceImpl
 import com.example.weathery.data.repositories.SettingsRepositoryImpl
 import com.example.weathery.data.sharedpreferences.SettingsLocalDataSourceImpl
 import com.example.weathery.main.shared.SettingsViewModel
 import com.example.weathery.main.shared.SettingsViewModelFactory
-import com.example.weathery.utils.Constants.Companion.UNITS_STANDARD_KEY
-import com.example.weathery.utils.SimpleUtils
+import com.example.weathery.data.utils.Constants.Companion.UNITS_STANDARD_KEY
+import com.example.weathery.data.utils.SimpleUtils
 import kotlinx.coroutines.launch
 
 
@@ -112,7 +112,7 @@ class WeatherFragment : Fragment() {
         var dateTime = SimpleUtils.convertUnixTimeStamp(response.current?.dt?.toLong(),
             response.timezone)
         binding.txtTime.text = "${getString(R.string.last_update)}: ${dateTime.first} ${dateTime.second}"
-        binding.txtHumidity.text = response.current?.humidity?.toString()
+        binding.txtHumidity.text = "${response.current?.humidity?.toString()}%"
         binding.txtPressure.text = response.current?.pressure?.toString()
         binding.txtVisibility.text = response.current?.visibility?.toString()
         binding.txtWindSpeed.text = response.current?.wind_speed?.toString()
