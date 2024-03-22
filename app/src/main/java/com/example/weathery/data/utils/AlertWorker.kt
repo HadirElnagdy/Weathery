@@ -44,7 +44,8 @@ class AlertWorker(private val context: Context, workerParams: WorkerParameters)
     )
 
     private val weatherViewModel: WeatherViewModel by lazy {
-        ViewModelProvider(context as ViewModelStoreOwner, WeatherViewModelFactory(
+        val owner = context.applicationContext as MyApplication
+        ViewModelProvider(owner, WeatherViewModelFactory(
             context.applicationContext as Application,
             WeatherRepositoryImpl.getInstance(
                 FavLocationLocalDataSourceImpl.getInstance(context),
@@ -53,8 +54,10 @@ class AlertWorker(private val context: Context, workerParams: WorkerParameters)
         ))[WeatherViewModel::class.java]
     }
 
+
     override suspend fun doWork(): Result {
         val alertId = inputData.getLong("id", -1L)
+        Log.i("TAG", "doWork: " + alertId)
         if (alertId == -1L) {
             return Result.failure()
         }
@@ -63,6 +66,7 @@ class AlertWorker(private val context: Context, workerParams: WorkerParameters)
             val forecast = weatherViewModel.forecast.firstOrNull()
             val weatherResponse = (forecast as? ApiState.Success)?.data
             weatherResponse?.let { createAlarm(context, alert, it) }
+            Log.i("AlertWorker", "try processing work:")
             Result.success()
         } catch (e: Exception) {
             Log.e("AlertWorker", "Error processing work: $e")

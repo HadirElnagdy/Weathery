@@ -13,6 +13,7 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.text.format.DateFormat
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -256,7 +257,10 @@ class AlertsFragment : Fragment() {
         calendar.set(Calendar.HOUR_OF_DAY, selectedTimeCalendar.get(Calendar.HOUR_OF_DAY))
         calendar.set(Calendar.MINUTE, selectedTimeCalendar.get(Calendar.MINUTE))
 
+
+
         val intent = Intent(requireContext(), AlarmReceiver::class.java)
+        Log.i("TAG", "scheduleAlarm: ${alertId}")
         intent.putExtra("id", alertId)
         val pendingIntent = PendingIntent.getBroadcast(
             requireContext(),
@@ -265,11 +269,13 @@ class AlertsFragment : Fragment() {
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
 
+        Log.i("TAG", "scheduleAlarm: " + calendar.timeInMillis)
         alarmManager.setExactAndAllowWhileIdle(
             AlarmManager.RTC_WAKEUP,
-            calendar.timeInMillis,
+            20000/*calendar.timeInMillis*/,
             pendingIntent
         )
+
     }
 
     private fun requirePermissions() {
